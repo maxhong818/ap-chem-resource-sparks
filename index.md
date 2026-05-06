@@ -1,6 +1,8 @@
-<head>
-  <link rel="icon" type="image/png" href="./favicon.png">
-</head>
+---
+layout: default
+title: Home
+---
+<link rel="shortcut icon" type="image/png" href="{{ site.baseurl }}/favicon.png">
 
 # AP Chemistry Exam Review Wiki
 

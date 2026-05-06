@@ -1,0 +1,221 @@
+---
+layout: none
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AP Chemistry Exam Review Wiki</title>
+  <link rel="icon" type="image/png" href="{{ site.baseurl }}/favicon.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    /* Light Theme Variables & Reset */
+    :root {
+      --bg-main: #f8fafc; /* Very light blue/grey airy background */
+      --sidebar-bg: #ffffff;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --border-color: #e2e8f0;
+      --cayman-gradient: linear-gradient(120deg, #155799, #159957);
+      --sidebar-width: 280px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    html { 
+      scroll-behavior: smooth; /* Enables smooth scrolling for anchor links */
+      font-family: 'Inter', sans-serif;
+      color: var(--text-main);
+      background-color: var(--bg-main);
+    }
+
+    /* Sidebar Styling */
+    aside {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: var(--sidebar-width);
+      height: 100vh;
+      background: var(--sidebar-bg);
+      border-right: 1px solid var(--border-color);
+      padding: 2rem 1.5rem;
+      overflow-y: auto;
+      box-shadow: 2px 0 10px rgba(0,0,0,0.03);
+    }
+
+    .sidebar-brand {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 2rem;
+      color: #159957;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .sidebar-nav {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .sidebar-nav a {
+      text-decoration: none;
+      color: var(--text-muted);
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      display: block;
+      transition: all 0.2s ease;
+      font-weight: 500;
+    }
+
+    .sidebar-nav a:hover {
+      background: #f1f5f9;
+      color: #155799;
+    }
+
+    /* Main Content Area */
+    main {
+      margin-left: var(--sidebar-width);
+      min-height: 100vh;
+    }
+
+    /* Cayman Gradient Hero Section */
+    .hero {
+      background: var(--cayman-gradient);
+      color: white;
+      padding: 5rem 3rem;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    .hero h1 { font-size: 2.5rem; margin-bottom: 1rem; }
+    .hero p { font-size: 1.2rem; opacity: 0.9; max-width: 600px; margin: 0 auto; }
+
+    /* Content Sections (Scrollable) */
+    .unit-section {
+      padding: 4rem 3rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+    
+    .unit-section h2 {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--border-color);
+    }
+
+    /* Colorful Cards Grid */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .card {
+      background: white;
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      border: 1px solid var(--border-color);
+      border-top: 5px solid #ccc; /* Default */
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+    }
+
+    .card h3 { margin-bottom: 1rem; font-size: 1.25rem; }
+    .card p { color: var(--text-muted); line-height: 1.6; font-size: 0.95rem; }
+
+    /* Unique Card Colors */
+    .color-1 { border-top-color: #ef4444; } /* Red */
+    .color-2 { border-top-color: #f97316; } /* Orange */
+    .color-3 { border-top-color: #eab308; } /* Yellow */
+    .color-4 { border-top-color: #22c55e; } /* Green */
+    .color-5 { border-top-color: #06b6d4; } /* Cyan */
+    .color-6 { border-top-color: #3b82f6; } /* Blue */
+    .color-7 { border-top-color: #8b5cf6; } /* Purple */
+    .color-8 { border-top-color: #d946ef; } /* Pink */
+    .color-9 { border-top-color: #f43f5e; } /* Rose */
+  </style>
+</head>
+<body>
+
+  <aside>
+    <div class="sidebar-brand">
+      ⚛️ AP Chem Wiki
+    </div>
+    <ul class="sidebar-nav">
+      <li><a href="#hero">Top</a></li>
+      <li><a href="#unit-1">Unit 1: Atomic Structure</a></li>
+      <li><a href="#unit-2">Unit 2: Molecular Structure</a></li>
+      <li><a href="#unit-3">Unit 3: IMFs ⭐️</a></li>
+      <li><a href="#unit-4">Unit 4: Chemical Reactions</a></li>
+      <li><a href="#unit-5">Unit 5: Kinetics</a></li>
+      <li><a href="#unit-6">Unit 6: Thermodynamics</a></li>
+      <li><a href="#unit-7">Unit 7: Equilibrium</a></li>
+      <li><a href="#unit-8">Unit 8: Acids & Bases ⭐️</a></li>
+      <li><a href="#unit-9">Unit 9: Apps of Thermo</a></li>
+      <li><a href="#quiz">Practice Quiz</a></li>
+    </ul>
+  </aside>
+
+  <main>
+    
+    <section id="hero" class="hero">
+      <h1>AP Chemistry Exam Review</h1>
+      <p>A comprehensive, interactive guide to mastering the 9 units of AP Chemistry. Scroll down or use the sidebar to navigate.</p>
+    </section>
+
+    <section id="unit-3" class="unit-section">
+      <h2>Unit 3: Intermolecular Forces & Properties</h2>
+      
+      <div class="card-grid">
+        <div class="card color-3">
+          <h3>Types of IMFs</h3>
+          <p>London Dispersion, Dipole-Dipole, and Hydrogen Bonding. Learn how to identify and rank them based on polarizability.</p>
+        </div>
+        <div class="card color-4">
+          <h3>Gas Laws</h3>
+          <p>Ideal Gas Law vs. Real Gases. Understand the deviations caused by pressure and volume at extreme conditions.</p>
+        </div>
+        <div class="card color-5">
+          <h3>Solutions & Chromatography</h3>
+          <p>"Like dissolves like." A deep dive into Rf values and how intermolecular forces dictate separation in a lab setting.</p>
+        </div>
+      </div>
+      
+      <br>
+      <p><em>Detailed unit notes and formulas will go here.</em></p>
+    </section>
+
+    <section id="unit-9" class="unit-section">
+      <h2>Unit 9: Applications of Thermodynamics</h2>
+      
+      <div class="card-grid">
+        <div class="card color-6">
+          <h3>Galvanic Cells</h3>
+          <p>Anodes, cathodes, and standard reduction potentials. Includes real lab data from our Magnesium-Copper cell experiment.</p>
+        </div>
+        <div class="card color-7">
+          <h3>Gibbs Free Energy</h3>
+          <p>Connecting ΔG° to E°cell and the equilibrium constant (K) using the Nernst Equation.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="quiz" class="unit-section">
+      <h2>📝 Practice Quiz</h2>
+      <p>Embed your Google Form here.</p>
+    </section>
+
+  </main>
+
+</body>
+</html>

@@ -1,3 +1,7 @@
+<head>
+  <link rel="icon" type="image/png" href="./favicon.png">
+</head>
+
 # AP Chemistry Exam Review Wiki
 
 Welcome! This resource is designed to help future AP Chemistry students master the most challenging concepts on the exam. Use the navigation below to dive into each unit.

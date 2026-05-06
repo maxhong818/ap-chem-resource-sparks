@@ -7,13 +7,14 @@ layout: none
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AP Chemistry Exam Review Wiki</title>
-  <link rel="icon" type="image/png" href="{{ site.baseurl }}/favicon.png">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="icon" type="image/png" href="https://maxhong818.github.io/ap-chem-wiki-sparks/favicon.png">
+  
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   
   <style>
-    /* Light Theme Variables & Reset */
     :root {
-      --bg-main: #f8fafc; /* Very light blue/grey airy background */
+      --bg-main: #f8fafc; 
       --sidebar-bg: #ffffff;
       --text-main: #1e293b;
       --text-muted: #64748b;
@@ -25,13 +26,13 @@ layout: none
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     
     html { 
-      scroll-behavior: smooth; /* Enables smooth scrolling for anchor links */
+      scroll-behavior: smooth; 
       font-family: 'Inter', sans-serif;
       color: var(--text-main);
       background-color: var(--bg-main);
     }
 
-    /* Sidebar Styling */
+    /* Sidebar Layout */
     aside {
       position: fixed;
       top: 0;
@@ -42,7 +43,6 @@ layout: none
       border-right: 1px solid var(--border-color);
       padding: 2rem 1.5rem;
       overflow-y: auto;
-      box-shadow: 2px 0 10px rgba(0,0,0,0.03);
     }
 
     .sidebar-brand {
@@ -59,17 +59,18 @@ layout: none
       list-style: none;
       display: flex;
       flex-direction: column;
-      gap: 0.5rem;
+      gap: 0.4rem;
     }
 
     .sidebar-nav a {
       text-decoration: none;
       color: var(--text-muted);
-      padding: 0.75rem 1rem;
+      padding: 0.6rem 0.8rem;
       border-radius: 8px;
       display: block;
       transition: all 0.2s ease;
       font-weight: 500;
+      font-size: 0.9rem;
     }
 
     .sidebar-nav a:hover {
@@ -77,72 +78,110 @@ layout: none
       color: #155799;
     }
 
-    /* Main Content Area */
+    /* Content Area */
     main {
       margin-left: var(--sidebar-width);
       min-height: 100vh;
     }
 
-    /* Cayman Gradient Hero Section */
+    /* Hero header with green/blue gradient */
     .hero {
       background: var(--cayman-gradient);
       color: white;
-      padding: 5rem 3rem;
+      padding: 4.5rem 3rem;
       text-align: center;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     }
 
-    .hero h1 { font-size: 2.5rem; margin-bottom: 1rem; }
-    .hero p { font-size: 1.2rem; opacity: 0.9; max-width: 600px; margin: 0 auto; }
+    .hero h1 { font-size: 2.5rem; margin-bottom: 1rem; font-weight: 700; }
+    .hero p { font-size: 1.15rem; opacity: 0.9; max-width: 600px; margin: 0 auto; }
 
-    /* Content Sections (Scrollable) */
+    /* Unit section layouts */
     .unit-section {
       padding: 4rem 3rem;
       border-bottom: 1px solid var(--border-color);
+      max-width: 1200px;
     }
     
     .unit-section h2 {
-      font-size: 2rem;
-      margin-bottom: 2rem;
+      font-size: 1.75rem;
+      margin-bottom: 1.5rem;
       padding-bottom: 0.5rem;
       border-bottom: 2px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
 
-    /* Colorful Cards Grid */
+    /* Card Grids */
     .card-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 2rem;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 1rem;
     }
 
     .card {
       background: white;
       border-radius: 12px;
-      padding: 2rem;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+      padding: 1.5rem;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.03);
       transition: transform 0.2s ease, box-shadow 0.2s ease;
       border: 1px solid var(--border-color);
-      border-top: 5px solid #ccc; /* Default */
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
 
     .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+      transform: translateY(-4px);
+      box-shadow: 0 10px 15px rgba(0,0,0,0.06);
     }
 
-    .card h3 { margin-bottom: 1rem; font-size: 1.25rem; }
-    .card p { color: var(--text-muted); line-height: 1.6; font-size: 0.95rem; }
+    .card-content h3 { margin-bottom: 0.75rem; font-size: 1.15rem; color: var(--text-main); }
+    .card-content p { color: var(--text-muted); line-height: 1.5; font-size: 0.9rem; margin-bottom: 1.5rem; }
 
-    /* Unique Card Colors */
-    .color-1 { border-top-color: #ef4444; } /* Red */
-    .color-2 { border-top-color: #f97316; } /* Orange */
-    .color-3 { border-top-color: #eab308; } /* Yellow */
-    .color-4 { border-top-color: #22c55e; } /* Green */
-    .color-5 { border-top-color: #06b6d4; } /* Cyan */
-    .color-6 { border-top-color: #3b82f6; } /* Blue */
-    .color-7 { border-top-color: #8b5cf6; } /* Purple */
-    .color-8 { border-top-color: #d946ef; } /* Pink */
-    .color-9 { border-top-color: #f43f5e; } /* Rose */
+    /* "Study Section" Subpage Buttons */
+    .study-btn {
+      display: inline-block;
+      text-decoration: none;
+      text-align: center;
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 0.6rem 1rem;
+      border-radius: 6px;
+      color: white;
+      transition: opacity 0.2s ease;
+    }
+
+    .study-btn:hover { opacity: 0.9; }
+
+    /* Category Colorful Theme Accents */
+    .cat-structure { border-top: 5px solid #ef4444; } /* Red */
+    .btn-structure { background-color: #ef4444; }
+
+    .cat-bonding { border-top: 5px solid #f97316; } /* Orange */
+    .btn-bonding { background-color: #f97316; }
+
+    .cat-imfs { border-top: 5px solid #eab308; } /* Yellow */
+    .btn-imfs { background-color: #eab308; }
+
+    .cat-reactions { border-top: 5px solid #22c55e; } /* Green */
+    .btn-reactions { background-color: #22c55e; }
+
+    .cat-kinetics { border-top: 5px solid #06b6d4; } /* Cyan */
+    .btn-kinetics { background-color: #06b6d4; }
+
+    .cat-thermo { border-top: 5px solid #3b82f6; } /* Blue */
+    .btn-thermo { background-color: #3b82f6; }
+
+    .cat-equilibrium { border-top: 5px solid #6366f1; } /* Indigo */
+    .btn-equilibrium { background-color: #6366f1; }
+
+    .cat-acids { border-top: 5px solid #8b5cf6; } /* Purple */
+    .btn-acids { background-color: #8b5cf6; }
+
+    .cat-entropy { border-top: 5px solid #ec4899; } /* Pink */
+    .btn-entropy { background-color: #ec4899; }
   </style>
 </head>
 <body>
@@ -152,7 +191,7 @@ layout: none
       ⚛️ AP Chem Wiki
     </div>
     <ul class="sidebar-nav">
-      <li><a href="#hero">Top</a></li>
+      <li><a href="#hero">🏠 Top</a></li>
       <li><a href="#unit-1">Unit 1: Atomic Structure</a></li>
       <li><a href="#unit-2">Unit 2: Molecular Structure</a></li>
       <li><a href="#unit-3">Unit 3: IMFs ⭐️</a></li>
@@ -162,7 +201,7 @@ layout: none
       <li><a href="#unit-7">Unit 7: Equilibrium</a></li>
       <li><a href="#unit-8">Unit 8: Acids & Bases ⭐️</a></li>
       <li><a href="#unit-9">Unit 9: Apps of Thermo</a></li>
-      <li><a href="#quiz">Practice Quiz</a></li>
+      <li><a href="#quiz">📝 Practice Quiz</a></li>
     </ul>
   </aside>
 
@@ -170,49 +209,196 @@ layout: none
     
     <section id="hero" class="hero">
       <h1>AP Chemistry Exam Review</h1>
-      <p>A comprehensive, interactive guide to mastering the 9 units of AP Chemistry. Scroll down or use the sidebar to navigate.</p>
+      <p>A beautiful, responsive dashboard to master all 9 chemistry units. Click any segment to jump directly to its concepts and subpages.</p>
+    </section>
+
+    <section id="unit-1" class="unit-section">
+      <h2> Unit 1: Atomic Structure & Properties</h2>
+      <div class="card-grid">
+        <div class="card cat-structure">
+          <div class="card-content">
+            <h3>Moles & Mass Spectroscopy</h3>
+            <p>Master isotopic abundance, average atomic mass calculations, and elemental composition analysis.</p>
+          </div>
+          <a href="./Unit-1/moles-spectroscopy.html" class="study-btn btn-structure">Study Section →</a>
+        </div>
+        <div class="card cat-structure">
+          <div class="card-content">
+            <h3>Periodic Trends</h3>
+            <p>Understand the rules behind electronegativity, ionization energy, atomic radius, and shielding effects.</p>
+          </div>
+          <a href="./Unit-1/periodic-trends.html" class="study-btn btn-structure">Study Section →</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="unit-2" class="unit-section">
+      <h2> Unit 2: Molecular & Ionic Compound Structure</h2>
+      <div class="card-grid">
+        <div class="card cat-bonding">
+          <div class="card-content">
+            <h3>Types of Chemical Bonds</h3>
+            <p>Analyze ionic, covalent, and metallic bonds, along with electronegativity differences and polarity.</p>
+          </div>
+          <a href="./Unit-2/bond-types.html" class="study-btn btn-bonding">Study Section →</a>
+        </div>
+        <div class="card cat-bonding">
+          <div class="card-content">
+            <h3>Lewis Diagrams & VSEPR</h3>
+            <p>Draw accurate structures, determine formal charge, assess resonance, and predict molecular geometry.</p>
+          </div>
+          <a href="./Unit-2/lewis-vsepr.html" class="study-btn btn-bonding">Study Section →</a>
+        </div>
+      </div>
     </section>
 
     <section id="unit-3" class="unit-section">
-      <h2>Unit 3: Intermolecular Forces & Properties</h2>
-      
+      <h2> Unit 3: Intermolecular Forces & Properties (HEAVY WEIGHT)</h2>
       <div class="card-grid">
-        <div class="card color-3">
-          <h3>Types of IMFs</h3>
-          <p>London Dispersion, Dipole-Dipole, and Hydrogen Bonding. Learn how to identify and rank them based on polarizability.</p>
+        <div class="card cat-imfs">
+          <div class="card-content">
+            <h3>Intermolecular Forces</h3>
+            <p>Deep-dive into London dispersion, dipole-dipole, hydrogen bonding, and their impact on physical states.</p>
+          </div>
+          <a href="./Unit-3/imf-types.html" class="study-btn btn-imfs">Study Section →</a>
         </div>
-        <div class="card color-4">
-          <h3>Gas Laws</h3>
-          <p>Ideal Gas Law vs. Real Gases. Understand the deviations caused by pressure and volume at extreme conditions.</p>
+        <div class="card cat-imfs">
+          <div class="card-content">
+            <h3>Ideal & Real Gas Behavior</h3>
+            <p>Practice standard gas stoichiometry and analyze why real gases deviate from ideal conditions at low T and high P.</p>
+          </div>
+          <a href="./Unit-3/gas-behavior.html" class="study-btn btn-imfs">Study Section →</a>
         </div>
-        <div class="card color-5">
-          <h3>Solutions & Chromatography</h3>
-          <p>"Like dissolves like." A deep dive into Rf values and how intermolecular forces dictate separation in a lab setting.</p>
+        <div class="card cat-imfs">
+          <div class="card-content">
+            <h3>Solutions & Mixtures</h3>
+            <p>Understand solubility concepts ("like dissolves like"), particulate representations, and chromatography methods.</p>
+          </div>
+          <a href="./Unit-3/solubility-mixtures.html" class="study-btn btn-imfs">Study Section →</a>
         </div>
       </div>
-      
-      <br>
-      <p><em>Detailed unit notes and formulas will go here.</em></p>
+    </section>
+
+    <section id="unit-4" class="unit-section">
+      <h2> Unit 4: Chemical Reactions</h2>
+      <div class="card-grid">
+        <div class="card cat-reactions">
+          <div class="card-content">
+            <h3>Net Ionic Equations</h3>
+            <p>Learn how to accurately write net ionic equations for precipitation reactions and identify spectator ions.</p>
+          </div>
+          <a href="./Unit-4/net-ionic.html" class="study-btn btn-reactions">Study Section →</a>
+        </div>
+        <div class="card cat-reactions">
+          <div class="card-content">
+            <h3>Titrations & Redox</h3>
+            <p>Break down acid-base titrations, identify oxidation-reduction numbers, and balance electron transfers.</p>
+          </div>
+          <a href="./Unit-4/titrations-redox.html" class="study-btn btn-reactions">Study Section →</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="unit-5" class="unit-section">
+      <h2> Unit 5: Kinetics</h2>
+      <div class="card-grid">
+        <div class="card cat-kinetics">
+          <div class="card-content">
+            <h3>Rate Laws & Integrated Rate Laws</h3>
+            <p>Determine overall reaction order from data tables and utilize first- and second-order linear graphing methods.</p>
+          </div>
+          <a href="./Unit-5/rate-laws.html" class="study-btn btn-kinetics">Study Section →</a>
+        </div>
+        <div class="card cat-kinetics">
+          <div class="card-content">
+            <h3>Reaction Mechanisms</h3>
+            <p>Analyze elementary steps, intermediate species, catalysts, and identify the Rate-Determining Step.</p>
+          </div>
+          <a href="./Unit-5/mechanisms.html" class="study-btn btn-kinetics">Study Section →</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="unit-6" class="unit-section">
+      <h2>🔵 Unit 6: Thermodynamics</h2>
+      <div class="card-grid">
+        <div class="card cat-thermo">
+          <div class="card-content">
+            <h3>Enthalpy of Reaction</h3>
+            <p>Calculate heat transfers using calorimetry, Hess’s Law, enthalpies of formation, and bond dissociation energies.</p>
+          </div>
+          <a href="./Unit-6/enthalpy.html" class="study-btn btn-thermo">Study Section →</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="unit-7" class="unit-section">
+      <h2> Unit 7: Equilibrium</h2>
+      <div class="card-grid">
+        <div class="card cat-equilibrium">
+          <div class="card-content">
+            <h3>Equilibrium Constant (K)</h3>
+            <p>Construct dynamic ICE tables, write equilibrium expressions, and compare Q vs. K to predict shifting directions.</p>
+          </div>
+          <a href="./Unit-7/eq-constant.html" class="study-btn btn-equilibrium">Study Section →</a>
+        </div>
+        <div class="card cat-equilibrium">
+          <div class="card-content">
+            <h3>Le Chatelier's Principle</h3>
+            <p>Describe system shifts when stressed by modifications in temperature, pressure, volume, or concentration.</p>
+          </div>
+          <a href="./Unit-7/le-chatelier.html" class="study-btn btn-equilibrium">Study Section →</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="unit-8" class="unit-section">
+      <h2> Unit 8: Acids & Bases (HEAVY WEIGHT)</h2>
+      <div class="card-grid">
+        <div class="card cat-acids">
+          <div class="card-content">
+            <h3>pH, pOH, and Ka/Kb</h3>
+            <p>Evaluate calculations for strong and weak acids/bases, write proton-transfer reactions, and determine pH.</p>
+          </div>
+          <a href="./Unit-8/ph-calculations.html" class="study-btn btn-acids">Study Section →</a>
+        </div>
+        <div class="card cat-acids">
+          <div class="card-content">
+            <h3>Titrations & Buffers</h3>
+            <p>Analyze weak-strong titration curves, locate the equivalence and half-equivalence points, and calculate buffer capacity.</p>
+          </div>
+          <a href="./Unit-8/titrations-buffers.html" class="study-btn btn-acids">Study Section →</a>
+        </div>
+      </div>
     </section>
 
     <section id="unit-9" class="unit-section">
-      <h2>Unit 9: Applications of Thermodynamics</h2>
-      
+      <h2> Unit 9: Applications of Thermodynamics</h2>
       <div class="card-grid">
-        <div class="card color-6">
-          <h3>Galvanic Cells</h3>
-          <p>Anodes, cathodes, and standard reduction potentials. Includes real lab data from our Magnesium-Copper cell experiment.</p>
+        <div class="card cat-entropy">
+          <div class="card-content">
+            <h3>Entropy & Free Energy</h3>
+            <p>Determine thermodynamically favorable processes using ΔG = ΔH - TΔS and link those variables to equilibrium values.</p>
+          </div>
+          <a href="./Unit-9/entropy-free-energy.html" class="study-btn btn-entropy">Study Section →</a>
         </div>
-        <div class="card color-7">
-          <h3>Gibbs Free Energy</h3>
-          <p>Connecting ΔG° to E°cell and the equilibrium constant (K) using the Nernst Equation.</p>
+        <div class="card cat-entropy">
+          <div class="card-content">
+            <h3>Galvanic & Electrolytic Cells</h3>
+            <p>Design battery systems, calculate cell potential (E°cell), trace electron/anion transfers, and apply Faraday's laws.</p>
+          </div>
+          <a href="./Unit-9/electrochemistry.html" class="study-btn btn-entropy">Study Section →</a>
         </div>
       </div>
     </section>
 
     <section id="quiz" class="unit-section">
-      <h2>📝 Practice Quiz</h2>
-      <p>Embed your Google Form here.</p>
+      <h2>📝 AP Chemistry Practice Quiz Portal</h2>
+      <p style="margin-bottom: 2rem; color: var(--text-muted);">Test your knowledge with challenging questions mimicking real AP Chem exams. Embedded practice quiz loading below.</p>
+      
+      <div style="background: white; padding: 1rem; border-radius: 12px; border: 1px solid var(--border-color); box-shadow: 0 4px 6px rgba(0,0,0,0.02);">
+        <p><em>[Your Google Forms Embed Link goes here]</em></p>
+      </div>
     </section>
 
   </main>

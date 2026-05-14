@@ -7,400 +7,1024 @@ layout: none
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AP Chemistry Exam Review Resource</title>
-  
-  <link rel="icon" type="image/png" href="https://maxhong818.github.io/ap-chem-resource-sparks/favicon.png">
-  
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  
+
+  <link rel="icon" type="image/png" href="./favicon.png">
+  <!-- Plus Jakarta Sans: clean, modern, professional -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
   <style>
+    /* ── Variables ─────────────────────────────── */
     :root {
-      --bg-main: #f8fafc; 
-      --sidebar-bg: #ffffff;
-      --text-main: #1e293b;
-      --text-muted: #64748b;
-      --border-color: #e2e8f0;
-      --cayman-gradient: linear-gradient(120deg, #155799, #159957);
-      --sidebar-width: 280px;
+      --bg-main:       #f4f6f9;
+      --sidebar-bg:    #ffffff;
+      --text-main:     #18212e;
+      --text-muted:    #5c6d82;
+      --border-color:  #dde3ec;
+      --cayman-start:  #155799;
+      --cayman-end:    #159957;
+      --cayman-gradient: linear-gradient(125deg, var(--cayman-start), var(--cayman-end));
+      --sidebar-width: 272px;
+      --radius-md:     10px;
+      --radius-lg:     14px;
+      --shadow-card:   0 1px 3px rgba(0,0,0,.05), 0 4px 12px rgba(0,0,0,.06);
+      --shadow-hover:  0 4px 8px rgba(0,0,0,.06), 0 12px 28px rgba(0,0,0,.10);
+      --transition:    0.2s ease;
     }
 
+    /* ── Reset ─────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    
-    html { 
-      scroll-behavior: smooth; 
-      font-family: 'Inter', sans-serif;
+    html, body              { margin: 0; padding: 0; }   /* belt-and-suspenders for white-bar fix */
+
+    html {
+      scroll-behavior: smooth;
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
       color: var(--text-main);
-      background-color: var(--bg-main);
+      background: var(--bg-main);
+      -webkit-font-smoothing: antialiased;
     }
 
-    /* Sidebar Layout */
+    /* ── Sections: leave room so fixed sidebar doesn't clip anchors ── */
+    section[id] { scroll-margin-top: 0; }
+
+    /* ═══════════════════════════════════════════
+       SIDEBAR
+    ═══════════════════════════════════════════ */
     aside {
       position: fixed;
-      top: 0;
-      left: 0;
+      top: 0; left: 0;
       width: var(--sidebar-width);
       height: 100vh;
       background: var(--sidebar-bg);
       border-right: 1px solid var(--border-color);
-      padding: 2rem 1.5rem;
+      padding: 1.75rem 1.1rem 2rem;
       overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
     }
 
     .sidebar-brand {
-      font-size: 1.25rem;
-      font-weight: 700;
-      margin-bottom: 2rem;
-      color: #159957;
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--cayman-start);
+      margin-bottom: 1.5rem;
+      padding: 0 0.4rem;
+      letter-spacing: -0.01em;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 0.5rem;
     }
+    .sidebar-brand span { color: var(--cayman-end); }
 
     .sidebar-nav {
       list-style: none;
       display: flex;
       flex-direction: column;
-      gap: 0.4rem;
+      gap: 0.1rem;
     }
 
     .sidebar-nav a {
       text-decoration: none;
       color: var(--text-muted);
-      padding: 0.6rem 0.8rem;
-      border-radius: 8px;
-      display: block;
-      transition: all 0.2s ease;
+      padding: 0.48rem 0.7rem;
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
       font-weight: 500;
-      font-size: 0.9rem;
+      font-size: 0.8rem;
+      line-height: 1.4;
+      border-left: 3px solid transparent;
+      transition: background var(--transition), color var(--transition), border-color var(--transition);
     }
 
     .sidebar-nav a:hover {
-      background: #f1f5f9;
-      color: #155799;
+      background: #f0f4f8;
+      color: var(--cayman-start);
     }
 
-    /* Content Area */
+    .sidebar-nav a.active { font-weight: 700; }
+    .sidebar-nav a.active[data-unit="1"] { color:#dc2626; border-left-color:#dc2626; background:#fff0f0; }
+    .sidebar-nav a.active[data-unit="2"] { color:#c2410c; border-left-color:#c2410c; background:#fff5ed; }
+    .sidebar-nav a.active[data-unit="3"] { color:#a16207; border-left-color:#a16207; background:#fefce8; }
+    .sidebar-nav a.active[data-unit="4"] { color:#15803d; border-left-color:#15803d; background:#f0fdf4; }
+    .sidebar-nav a.active[data-unit="5"] { color:#0e7490; border-left-color:#0e7490; background:#ecfeff; }
+    .sidebar-nav a.active[data-unit="6"] { color:#1d4ed8; border-left-color:#1d4ed8; background:#eff6ff; }
+    .sidebar-nav a.active[data-unit="7"] { color:#4338ca; border-left-color:#4338ca; background:#eef2ff; }
+    .sidebar-nav a.active[data-unit="8"] { color:#6d28d9; border-left-color:#6d28d9; background:#f5f3ff; }
+    .sidebar-nav a.active[data-unit="9"] { color:#be185d; border-left-color:#be185d; background:#fdf2f8; }
+    .sidebar-nav a.active[data-unit="s"] { color:#155799; border-left-color:#155799; background:#eff6ff; }
+    .sidebar-nav a.active[data-unit="q"] { color:#159957; border-left-color:#159957; background:#f0fdf4; }
+
+    .nav-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      opacity: 0.45;
+      transition: opacity 0.2s;
+    }
+    .sidebar-nav a:hover .nav-dot,
+    .sidebar-nav a.active .nav-dot { opacity: 1; }
+
+    /* divider before Supplements / Quiz */
+    .sidebar-nav li.nav-divider {
+      margin: 0.5rem 0.4rem 0.25rem;
+      border-top: 1px solid var(--border-color);
+    }
+
+    /* ═══════════════════════════════════════════
+       MAIN
+    ═══════════════════════════════════════════ */
     main {
       margin-left: var(--sidebar-width);
       min-height: 100vh;
     }
 
-    /* Hero header with green/blue gradient */
+    /* ── Hero ─────────────────────────────────── */
     .hero {
       background: var(--cayman-gradient);
       color: white;
-      padding: 4.5rem 3rem;
-      text-align: center;
-    }
-
-    .hero h1 { font-size: 2.5rem; margin-bottom: 1rem; font-weight: 700; }
-    .hero p { font-size: 1.15rem; opacity: 0.9; max-width: 600px; margin: 0 auto; }
-
-    /* Unit section layouts */
-    .unit-section {
       padding: 4rem 3rem;
-      border-bottom: 1px solid var(--border-color);
-      max-width: 1200px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
     }
-    
-    .unit-section h2 {
-      font-size: 1.75rem;
-      margin-bottom: 1.5rem;
-      padding-bottom: 0.5rem;
-      border-bottom: 2px solid var(--border-color);
+    /* subtle radial glow behind text */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 65% 80% at 50% 50%, rgba(255,255,255,0.07), transparent);
+      pointer-events: none;
+    }
+    .hero h1 {
+      font-size: 2.25rem;
+      font-weight: 800;
+      margin-bottom: 0.65rem;
+      letter-spacing: -0.03em;
+      position: relative;
+    }
+    .hero p {
+      font-size: 1.05rem;
+      opacity: 0.88;
+      max-width: 520px;
+      margin: 0 auto;
+      font-weight: 400;
+      position: relative;
+    }
+
+    /* ── Unit Section ─────────────────────────── */
+    .unit-section {
+      padding: 2.5rem 2.75rem 3rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    /* ── Unit Bubble ──────────────────────────── */
+    .unit-bubble {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 0.9rem;
+      border-radius: var(--radius-lg);
+      padding: 1.15rem 1.6rem;
+      margin-bottom: 1.25rem;
+      color: white;
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      box-shadow: 0 2px 4px rgba(0,0,0,.08), 0 8px 20px rgba(0,0,0,.12);
+      position: relative;
+      overflow: hidden;
+    }
+    /* inner shine */
+    .unit-bubble::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: rgba(255,255,255,0.35);
+    }
+    .unit-bubble .unit-number {
+      background: rgba(255,255,255,0.18);
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 7px;
+      padding: 0.18rem 0.6rem;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      white-space: nowrap;
     }
 
-    /* Card Grids */
-    .card-grid {
+    /* ── 4-card grid ──────────────────────────── */
+    .unit-cards {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 1.5rem;
-      margin-bottom: 1rem;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.65rem;
+    }
+    @media (max-width: 860px) {
+      .unit-cards { grid-template-columns: repeat(2, 1fr); }
     }
 
-    .card {
-      background: white;
-      border-radius: 12px;
-      padding: 1.5rem;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.03);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-      border: 1px solid var(--border-color);
+    .unit-card {
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 10px 15px rgba(0,0,0,0.06);
-    }
-
-    .card-content h3 { margin-bottom: 0.75rem; font-size: 1.15rem; color: var(--text-main); }
-    .card-content p { color: var(--text-muted); line-height: 1.5; font-size: 0.9rem; margin-bottom: 1.5rem; }
-
-    /* "Study Section" Subpage Buttons */
-    .study-btn {
-      display: inline-block;
+      align-items: center;
+      justify-content: center;
+      gap: 0.3rem;
+      background: white;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 1.2rem 0.75rem 1.1rem;
       text-decoration: none;
+      color: var(--text-main);
       text-align: center;
-      font-size: 0.85rem;
-      font-weight: 600;
-      padding: 0.6rem 1rem;
-      border-radius: 6px;
-      color: white;
-      transition: opacity 0.2s ease;
+      cursor: pointer;
+      box-shadow: var(--shadow-card);
+      transition:
+        transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1),
+        box-shadow 0.22s ease,
+        border-color 0.2s ease;
+      position: relative;
+      overflow: hidden;
     }
 
-    .study-btn:hover { opacity: 0.9; }
+    /* tinted background wash on hover */
+    .unit-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 0.22s ease;
+    }
+    .unit-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-hover);
+    }
+    .unit-card:hover::before { opacity: 1; }
 
-    /* Category Colorful Theme Accents */
-    .cat-structure { border-top: 5px solid #ef4444; } /* Red */
-    .btn-structure { background-color: #ef4444; }
+    .card-label {
+      font-size: 0.83rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      position: relative;
+    }
+    .card-subtext {
+      font-size: 0.68rem;
+      color: var(--text-muted);
+      font-weight: 400;
+      line-height: 1.3;
+      position: relative;
+    }
 
-    .cat-bonding { border-top: 5px solid #f97316; } /* Orange */
-    .btn-bonding { background-color: #f97316; }
+    /* ── Color themes ─────────────────────────── */
+    .bubble-structure   { background: linear-gradient(125deg,#c81e1e,#ef4444); }
+    .bubble-bonding     { background: linear-gradient(125deg,#c2410c,#f97316); }
+    .bubble-imfs        { background: linear-gradient(125deg,#a16207,#d97706); }
+    .bubble-reactions   { background: linear-gradient(125deg,#15803d,#22c55e); }
+    .bubble-kinetics    { background: linear-gradient(125deg,#0e7490,#06b6d4); }
+    .bubble-thermo      { background: linear-gradient(125deg,#1d4ed8,#3b82f6); }
+    .bubble-equilibrium { background: linear-gradient(125deg,#4338ca,#6366f1); }
+    .bubble-acids       { background: linear-gradient(125deg,#6d28d9,#8b5cf6); }
+    .bubble-entropy     { background: linear-gradient(125deg,#be185d,#ec4899); }
 
-    .cat-imfs { border-top: 5px solid #eab308; } /* Yellow */
-    .btn-imfs { background-color: #eab308; }
+    /* card per-unit hover tints & label colors */
+    .unit-card.cat-structure   { border-top: 3px solid #ef4444; }
+    .unit-card.cat-structure:hover   { border-color:#fca5a5; border-top-color:#ef4444; }
+    .unit-card.cat-structure::before { background:linear-gradient(160deg,#fff1f1,transparent); }
+    .unit-card.cat-structure   .card-label { color:#c81e1e; }
 
-    .cat-reactions { border-top: 5px solid #22c55e; } /* Green */
-    .btn-reactions { background-color: #22c55e; }
+    .unit-card.cat-bonding     { border-top: 3px solid #f97316; }
+    .unit-card.cat-bonding:hover    { border-color:#fdba74; border-top-color:#f97316; }
+    .unit-card.cat-bonding::before  { background:linear-gradient(160deg,#fff7ed,transparent); }
+    .unit-card.cat-bonding     .card-label { color:#c2410c; }
 
-    .cat-kinetics { border-top: 5px solid #06b6d4; } /* Cyan */
-    .btn-kinetics { background-color: #06b6d4; }
+    .unit-card.cat-imfs        { border-top: 3px solid #d97706; }
+    .unit-card.cat-imfs:hover       { border-color:#fde68a; border-top-color:#d97706; }
+    .unit-card.cat-imfs::before     { background:linear-gradient(160deg,#fffbeb,transparent); }
+    .unit-card.cat-imfs        .card-label { color:#a16207; }
 
-    .cat-thermo { border-top: 5px solid #3b82f6; } /* Blue */
-    .btn-thermo { background-color: #3b82f6; }
+    .unit-card.cat-reactions   { border-top: 3px solid #22c55e; }
+    .unit-card.cat-reactions:hover  { border-color:#86efac; border-top-color:#22c55e; }
+    .unit-card.cat-reactions::before{ background:linear-gradient(160deg,#f0fdf4,transparent); }
+    .unit-card.cat-reactions   .card-label { color:#15803d; }
 
-    .cat-equilibrium { border-top: 5px solid #6366f1; } /* Indigo */
-    .btn-equilibrium { background-color: #6366f1; }
+    .unit-card.cat-kinetics    { border-top: 3px solid #06b6d4; }
+    .unit-card.cat-kinetics:hover   { border-color:#67e8f9; border-top-color:#06b6d4; }
+    .unit-card.cat-kinetics::before { background:linear-gradient(160deg,#ecfeff,transparent); }
+    .unit-card.cat-kinetics    .card-label { color:#0e7490; }
 
-    .cat-acids { border-top: 5px solid #8b5cf6; } /* Purple */
-    .btn-acids { background-color: #8b5cf6; }
+    .unit-card.cat-thermo      { border-top: 3px solid #3b82f6; }
+    .unit-card.cat-thermo:hover     { border-color:#93c5fd; border-top-color:#3b82f6; }
+    .unit-card.cat-thermo::before   { background:linear-gradient(160deg,#eff6ff,transparent); }
+    .unit-card.cat-thermo      .card-label { color:#1d4ed8; }
 
-    .cat-entropy { border-top: 5px solid #ec4899; } /* Pink */
-    .btn-entropy { background-color: #ec4899; }
+    .unit-card.cat-equilibrium { border-top: 3px solid #6366f1; }
+    .unit-card.cat-equilibrium:hover  { border-color:#a5b4fc; border-top-color:#6366f1; }
+    .unit-card.cat-equilibrium::before{ background:linear-gradient(160deg,#eef2ff,transparent); }
+    .unit-card.cat-equilibrium .card-label { color:#4338ca; }
+
+    .unit-card.cat-acids       { border-top: 3px solid #8b5cf6; }
+    .unit-card.cat-acids:hover      { border-color:#c4b5fd; border-top-color:#8b5cf6; }
+    .unit-card.cat-acids::before    { background:linear-gradient(160deg,#f5f3ff,transparent); }
+    .unit-card.cat-acids       .card-label { color:#6d28d9; }
+
+    .unit-card.cat-entropy     { border-top: 3px solid #ec4899; }
+    .unit-card.cat-entropy:hover    { border-color:#f9a8d4; border-top-color:#ec4899; }
+    .unit-card.cat-entropy::before  { background:linear-gradient(160deg,#fdf2f8,transparent); }
+    .unit-card.cat-entropy     .card-label { color:#be185d; }
+
+    /* ═══════════════════════════════════════════
+       SUPPLEMENTS SECTION
+    ═══════════════════════════════════════════ */
+    .supplement-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.9rem;
+    }
+
+    .unit-group-box {
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 0.9rem;
+      background: white;
+      display: flex;
+      flex-direction: column;
+      gap: 0.38rem;
+      box-shadow: 0 1px 2px rgba(0,0,0,.04);
+    }
+
+    .unit-group-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--text-muted);
+      margin-bottom: 0.3rem;
+      padding-left: 2px;
+    }
+
+    .subsection-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      background: white;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 0.6rem 0.9rem;
+      text-decoration: none;
+      color: var(--text-main);
+      transition: transform 0.2s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.2s ease, border-color 0.2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .subsection-item::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      border-radius: var(--radius-md);
+      transition: opacity 0.22s ease;
+    }
+    .subsection-item:hover { transform:translateY(-2px); box-shadow:0 4px 12px rgba(0,0,0,.08); }
+    .subsection-item:hover::before { opacity: 1; }
+
+    .subsection-num {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      padding: 0.2rem 0.45rem;
+      border-radius: 5px;
+      white-space: nowrap;
+      color: white;
+      min-width: 2.8rem;
+      text-align: center;
+    }
+
+    .subsection-title { font-size: 0.84rem; font-weight: 500; flex: 1; }
+
+    .subsection-arrow {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      opacity: 0.4;
+      transition: transform 0.18s ease, opacity 0.18s ease;
+      flex-shrink: 0;
+    }
+    .subsection-item:hover .subsection-arrow { transform:translateX(3px); opacity:0.9; }
+
+    /* solid num badges */
+    .num-structure   { background:#c81e1e; }
+    .num-bonding     { background:#c2410c; }
+    .num-imfs        { background:#a16207; }
+    .num-reactions   { background:#15803d; }
+    .num-kinetics    { background:#0e7490; }
+    .num-thermo      { background:#1d4ed8; }
+    .num-equilibrium { background:#4338ca; }
+    .num-acids       { background:#6d28d9; }
+    .num-entropy     { background:#be185d; }
+
+    /* subsection hover tints */
+    .cat-structure::before   { background:linear-gradient(90deg,#fff0f0,transparent); }
+    .cat-bonding::before     { background:linear-gradient(90deg,#fff5ed,transparent); }
+    .cat-imfs::before        { background:linear-gradient(90deg,#fffbeb,transparent); }
+    .cat-reactions::before   { background:linear-gradient(90deg,#f0fdf4,transparent); }
+    .cat-kinetics::before    { background:linear-gradient(90deg,#ecfeff,transparent); }
+    .cat-thermo::before      { background:linear-gradient(90deg,#eff6ff,transparent); }
+    .cat-equilibrium::before { background:linear-gradient(90deg,#eef2ff,transparent); }
+    .cat-acids::before       { background:linear-gradient(90deg,#f5f3ff,transparent); }
+    .cat-entropy::before     { background:linear-gradient(90deg,#fdf2f8,transparent); }
+
+    .cat-structure:hover   { border-color:#fca5a5; }
+    .cat-bonding:hover     { border-color:#fdba74; }
+    .cat-imfs:hover        { border-color:#fde68a; }
+    .cat-reactions:hover   { border-color:#86efac; }
+    .cat-kinetics:hover    { border-color:#67e8f9; }
+    .cat-thermo:hover      { border-color:#93c5fd; }
+    .cat-equilibrium:hover { border-color:#a5b4fc; }
+    .cat-acids:hover       { border-color:#c4b5fd; }
+    .cat-entropy:hover     { border-color:#f9a8d4; }
+
+    /* key rows */
+    .subsection-item.is-key { background:#f9fafb; border-style:dashed; opacity:.82; }
+    .subsection-item.is-key:hover { opacity:1; }
+
+    .num-key-structure  { background:transparent; border:2px solid #c81e1e; color:#c81e1e; }
+    .num-key-bonding    { background:transparent; border:2px solid #c2410c; color:#c2410c; }
+    .num-key-imfs       { background:transparent; border:2px solid #a16207; color:#a16207; }
+    .num-key-reactions  { background:transparent; border:2px solid #15803d; color:#15803d; }
+    .num-key-kinetics   { background:transparent; border:2px solid #0e7490; color:#0e7490; }
+    .num-key-thermo     { background:transparent; border:2px solid #1d4ed8; color:#1d4ed8; }
+    .num-key-equilibrium{ background:transparent; border:2px solid #4338ca; color:#4338ca; }
+    .num-key-acids      { background:transparent; border:2px solid #6d28d9; color:#6d28d9; }
+    .num-key-entropy    { background:transparent; border:2px solid #be185d; color:#be185d; }
+
+    /* ═══════════════════════════════════════════
+       QUIZ PLACEHOLDER
+    ═══════════════════════════════════════════ */
+    .quiz-placeholder {
+      background: white;
+      padding: 1.5rem;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-card);
+      color: var(--text-muted);
+      margin-top: 1rem;
+      font-size: 0.9rem;
+    }
+
+    /* ═══════════════════════════════════════════
+       MODAL
+    ═══════════════════════════════════════════ */
+    .modal-overlay {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(15,23,42,0.55);
+      backdrop-filter: blur(5px);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.25s ease;
+      z-index: 1000;
+    }
+    .modal-overlay.active { opacity:1; pointer-events:auto; }
+
+    .modal-content {
+      background: white;
+      padding: 2rem 2rem 1.75rem;
+      border-radius: 18px;
+      width: 90%; max-width: 360px;
+      position: relative;
+      transform: translateY(18px) scale(0.98);
+      transition: transform 0.28s cubic-bezier(0.34,1.4,0.64,1);
+      box-shadow: 0 8px 16px rgba(0,0,0,.08), 0 24px 48px rgba(0,0,0,.18);
+    }
+    .modal-overlay.active .modal-content { transform:translateY(0) scale(1); }
+
+    .modal-close {
+      position: absolute; top: 0.9rem; right: 1.1rem;
+      background: none; border: none;
+      font-size: 1.5rem; color: var(--text-muted);
+      cursor: pointer; line-height: 1;
+      transition: color 0.18s;
+    }
+    .modal-close:hover { color: var(--text-main); }
+
+    .modal-title {
+      font-size: 1.1rem; font-weight: 700;
+      text-align: center; margin-bottom: 1.25rem;
+      letter-spacing: -0.02em;
+    }
+
+    .modal-buttons { display:flex; flex-direction:column; gap:0.6rem; }
+
+    .modal-lab-btn {
+      display: block; padding: 0.8rem 1rem;
+      background: var(--bg-main);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      text-align: center; text-decoration: none;
+      color: var(--text-main); font-weight: 600; font-size: 0.9rem;
+      transition: all 0.18s ease;
+    }
+    .modal-lab-btn:hover {
+      background: #eff6ff; border-color: #93c5fd; color: #1d4ed8;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,.06);
+    }
   </style>
 </head>
 <body>
 
+  <!-- ═══════════════ SIDEBAR ═══════════════ -->
   <aside>
-    <div class="sidebar-brand">
-      AP Chem Review Resource
-    </div>
+    <div class="sidebar-brand">⚗️ AP <span>Chem</span> Review</div>
     <ul class="sidebar-nav">
-      <li><a href="#unit-1">Unit 1: Atomic Structure and Properties</a></li>
-      <li><a href="#unit-2">Unit 2: Molecular and Ionic Compound Structure and Properties</a></li>
-      <li><a href="#unit-3">Unit 3: Intermolecular Forces and Properties ⭐️</a></li>
-      <li><a href="#unit-4">Unit 4: Chemical Reactions</a></li>
-      <li><a href="#unit-5">Unit 5: Kinetics</a></li>
-      <li><a href="#unit-6">Unit 6: Thermodynamics</a></li>
-      <li><a href="#unit-7">Unit 7: Equilibrium</a></li>
-      <li><a href="#unit-8">Unit 8: Acids & Bases ⭐️</a></li>
-      <li><a href="#unit-9">Unit 9: Applications of Thermodynamics</a></li>
-      <li><a href="#quiz">Practice Quiz</a></li>
+      <li><a href="#unit-1" data-unit="1"><span class="nav-dot" style="background:#ef4444"></span>Unit 1: Atomic Structure</a></li>
+      <li><a href="#unit-2" data-unit="2"><span class="nav-dot" style="background:#f97316"></span>Unit 2: Compound Structure</a></li>
+      <li><a href="#unit-3" data-unit="3"><span class="nav-dot" style="background:#d97706"></span>Unit 3: IMFs &amp; Properties ⭐️</a></li>
+      <li><a href="#unit-4" data-unit="4"><span class="nav-dot" style="background:#22c55e"></span>Unit 4: Chemical Reactions</a></li>
+      <li><a href="#unit-5" data-unit="5"><span class="nav-dot" style="background:#06b6d4"></span>Unit 5: Kinetics</a></li>
+      <li><a href="#unit-6" data-unit="6"><span class="nav-dot" style="background:#3b82f6"></span>Unit 6: Thermodynamics</a></li>
+      <li><a href="#unit-7" data-unit="7"><span class="nav-dot" style="background:#6366f1"></span>Unit 7: Equilibrium</a></li>
+      <li><a href="#unit-8" data-unit="8"><span class="nav-dot" style="background:#8b5cf6"></span>Unit 8: Acids &amp; Bases</a></li>
+      <li><a href="#unit-9" data-unit="9"><span class="nav-dot" style="background:#ec4899"></span>Unit 9: Applications of Thermo ⭐️</a></li>
+      <li class="nav-divider"></li>
+      <li><a href="#supplements" data-unit="s"><span class="nav-dot" style="background:#155799"></span>Lesson Supplements</a></li>
+      <li><a href="#quiz" data-unit="q"><span class="nav-dot" style="background:#159957"></span>Practice Quiz</a></li>
     </ul>
   </aside>
 
+  <!-- ═══════════════ MAIN ═══════════════ -->
   <main>
-    
+
     <section id="hero" class="hero">
       <h1>AP Chemistry Exam Review Resource</h1>
       <p>2026 Project made by Max H.</p>
     </section>
 
+    <!-- ═══ UNIT 1 ═══ -->
     <section id="unit-1" class="unit-section">
-      <h2> Unit 1: Atomic Structure & Properties</h2>
-      <div class="card-grid">
-        <div class="card cat-structure">
-          <div class="card-content">
-            <h3>Moles & Mass Spectroscopy</h3>
-            <p>Master isotopic abundance, average atomic mass calculations, and elemental composition analysis.</p>
-          </div>
-          <a href="./Unit-1/moles-spectroscopy.html" class="study-btn btn-structure">Study Section →</a>
-        </div>
-        <div class="card cat-structure">
-          <div class="card-content">
-            <h3>Periodic Trends</h3>
-            <p>Understand the rules behind electronegativity, ionization energy, atomic radius, and shielding effects.</p>
-          </div>
-          <a href="./Unit-1/periodic-trends.html" class="study-btn btn-structure">Study Section →</a>
-        </div>
+      <div class="unit-bubble bubble-structure">
+        <span class="unit-number">Unit 1</span>
+        Atomic Structure &amp; Properties
+      </div>
+      <div class="unit-cards">
+        <a href="./Unit-1/key-concepts.html" class="unit-card cat-structure">
+          <span class="card-label">Key Concepts</span>
+        </a>
+        <a href="INSERT_U1_SYLLABUS" target="_blank" class="unit-card cat-structure">
+          <span class="card-label">Syllabus</span>
+        </a>
+        <a href="INSERT_U1_LAB" target="_blank" class="unit-card cat-structure">
+          <span class="card-label">Lab</span>
+          <span class="card-subtext">Active Metals</span>
+        </a>
+        <a href="INSERT_U1_RESOURCES" target="_blank" class="unit-card cat-structure">
+          <span class="card-label">Resources</span>
+        </a>
       </div>
     </section>
 
+    <!-- ═══ UNIT 2 ═══ -->
     <section id="unit-2" class="unit-section">
-      <h2> Unit 2: Molecular & Ionic Compound Structure</h2>
-      <div class="card-grid">
-        <div class="card cat-bonding">
-          <div class="card-content">
-            <h3>Types of Chemical Bonds</h3>
-            <p>Analyze ionic, covalent, and metallic bonds, along with electronegativity differences and polarity.</p>
-          </div>
-          <a href="./Unit-2/bond-types.html" class="study-btn btn-bonding">Study Section →</a>
-        </div>
-        <div class="card cat-bonding">
-          <div class="card-content">
-            <h3>Lewis Diagrams & VSEPR</h3>
-            <p>Draw accurate structures, determine formal charge, assess resonance, and predict molecular geometry.</p>
-          </div>
-          <a href="./Unit-2/lewis-vsepr.html" class="study-btn btn-bonding">Study Section →</a>
-        </div>
+      <div class="unit-bubble bubble-bonding">
+        <span class="unit-number">Unit 2</span>
+        Molecular &amp; Ionic Compound Structure
+      </div>
+      <div class="unit-cards">
+        <a href="./Unit-2/key-concepts.html" class="unit-card cat-bonding">
+          <span class="card-label">Key Concepts</span>
+        </a>
+        <a href="INSERT_U2_SYLLABUS" target="_blank" class="unit-card cat-bonding">
+          <span class="card-label">Syllabus</span>
+        </a>
+        <a href="INSERT_U2_LAB" target="_blank" class="unit-card cat-bonding">
+          <span class="card-label">Lab</span>
+          <span class="card-subtext">Modeling Lab</span>
+        </a>
+        <a href="INSERT_U2_RESOURCES" target="_blank" class="unit-card cat-bonding">
+          <span class="card-label">Resources</span>
+        </a>
       </div>
     </section>
 
+    <!-- ═══ UNIT 3 ═══ -->
     <section id="unit-3" class="unit-section">
-      <h2> Unit 3: Intermolecular Forces & Properties (HEAVY WEIGHT)</h2>
-      <div class="card-grid">
-        <div class="card cat-imfs">
-          <div class="card-content">
-            <h3>Intermolecular Forces</h3>
-            <p>Deep-dive into London dispersion, dipole-dipole, hydrogen bonding, and their impact on physical states.</p>
-          </div>
-          <a href="./Unit-3/imf-types.html" class="study-btn btn-imfs">Study Section →</a>
-        </div>
-        <div class="card cat-imfs">
-          <div class="card-content">
-            <h3>Ideal & Real Gas Behavior</h3>
-            <p>Practice standard gas stoichiometry and analyze why real gases deviate from ideal conditions at low T and high P.</p>
-          </div>
-          <a href="./Unit-3/gas-behavior.html" class="study-btn btn-imfs">Study Section →</a>
-        </div>
-        <div class="card cat-imfs">
-          <div class="card-content">
-            <h3>Solutions & Mixtures</h3>
-            <p>Understand solubility concepts ("like dissolves like"), particulate representations, and chromatography methods.</p>
-          </div>
-          <a href="./Unit-3/solubility-mixtures.html" class="study-btn btn-imfs">Study Section →</a>
-        </div>
+      <div class="unit-bubble bubble-imfs">
+        <span class="unit-number">Unit 3 ⭐️</span>
+        Intermolecular Forces &amp; Properties
+      </div>
+      <div class="unit-cards">
+        <a href="./Unit-3/key-concepts.html" class="unit-card cat-imfs">
+          <span class="card-label">Key Concepts</span>
+        </a>
+        <a href="INSERT_U3_SYLLABUS" target="_blank" class="unit-card cat-imfs">
+          <span class="card-label">Syllabus</span>
+        </a>
+        <a href="#" class="unit-card cat-imfs multi-lab"
+           data-labs='[{"name":"Gas Lab","url":"INSERT_GAS_LAB_LINK"},{"name":"Sticky Questions","url":"INSERT_STICKY_QS_LINK"}]'>
+          <span class="card-label">Lab</span>
+          <span class="card-subtext">Gas Lab &amp; Sticky Q's</span>
+        </a>
+        <a href="INSERT_U3_RESOURCES" target="_blank" class="unit-card cat-imfs">
+          <span class="card-label">Resources</span>
+        </a>
       </div>
     </section>
 
+    <!-- ═══ UNIT 4 ═══ -->
     <section id="unit-4" class="unit-section">
-      <h2> Unit 4: Chemical Reactions</h2>
-      <div class="card-grid">
-        <div class="card cat-reactions">
-          <div class="card-content">
-            <h3>Net Ionic Equations</h3>
-            <p>Learn how to accurately write net ionic equations for precipitation reactions and identify spectator ions.</p>
-          </div>
-          <a href="./Unit-4/net-ionic.html" class="study-btn btn-reactions">Study Section →</a>
-        </div>
-        <div class="card cat-reactions">
-          <div class="card-content">
-            <h3>Titrations & Redox</h3>
-            <p>Break down acid-base titrations, identify oxidation-reduction numbers, and balance electron transfers.</p>
-          </div>
-          <a href="./Unit-4/titrations-redox.html" class="study-btn btn-reactions">Study Section →</a>
-        </div>
+      <div class="unit-bubble bubble-reactions">
+        <span class="unit-number">Unit 4</span>
+        Chemical Reactions
+      </div>
+      <div class="unit-cards">
+        <a href="./Unit-4/key-concepts.html" class="unit-card cat-reactions">
+          <span class="card-label">Key Concepts</span>
+        </a>
+        <a href="INSERT_U4_SYLLABUS" target="_blank" class="unit-card cat-reactions">
+          <span class="card-label">Syllabus</span>
+        </a>
+        <a href="INSERT_U4_LAB" target="_blank" class="unit-card cat-reactions">
+          <span class="card-label">Lab</span>
+          <span class="card-subtext">Redox Titration</span>
+        </a>
+        <a href="INSERT_U4_RESOURCES" target="_blank" class="unit-card cat-reactions">
+          <span class="card-label">Resources</span>
+        </a>
       </div>
     </section>
 
+    <!-- ═══ UNIT 5 ═══ -->
     <section id="unit-5" class="unit-section">
-      <h2> Unit 5: Kinetics</h2>
-      <div class="card-grid">
-        <div class="card cat-kinetics">
-          <div class="card-content">
-            <h3>Rate Laws & Integrated Rate Laws</h3>
-            <p>Determine overall reaction order from data tables and utilize first- and second-order linear graphing methods.</p>
-          </div>
-          <a href="./Unit-5/rate-laws.html" class="study-btn btn-kinetics">Study Section →</a>
-        </div>
-        <div class="card cat-kinetics">
-          <div class="card-content">
-            <h3>Reaction Mechanisms</h3>
-            <p>Analyze elementary steps, intermediate species, catalysts, and identify the Rate-Determining Step.</p>
-          </div>
-          <a href="./Unit-5/mechanisms.html" class="study-btn btn-kinetics">Study Section →</a>
-        </div>
+      <div class="unit-bubble bubble-kinetics">
+        <span class="unit-number">Unit 5</span>
+        Kinetics
+      </div>
+      <div class="unit-cards">
+        <a href="./Unit-5/key-concepts.html" class="unit-card cat-kinetics">
+          <span class="card-label">Key Concepts</span>
+        </a>
+        <a href="INSERT_U5_SYLLABUS" target="_blank" class="unit-card cat-kinetics">
+          <span class="card-label">Syllabus</span>
+        </a>
+        <a href="INSERT_U5_LAB" target="_blank" class="unit-card cat-kinetics">
+          <span class="card-label">Lab</span>
+          <span class="card-subtext">Kinetics of MG</span>
+        </a>
+        <a href="INSERT_U5_RESOURCES" target="_blank" class="unit-card cat-kinetics">
+          <span class="card-label">Resources</span>
+        </a>
       </div>
     </section>
 
+    <!-- ═══ UNIT 6 ═══ -->
     <section id="unit-6" class="unit-section">
-      <h2>🔵 Unit 6: Thermodynamics</h2>
-      <div class="card-grid">
-        <div class="card cat-thermo">
-          <div class="card-content">
-            <h3>Enthalpy of Reaction</h3>
-            <p>Calculate heat transfers using calorimetry, Hess’s Law, enthalpies of formation, and bond dissociation energies.</p>
-          </div>
-          <a href="./Unit-6/enthalpy.html" class="study-btn btn-thermo">Study Section →</a>
-        </div>
+      <div class="unit-bubble bubble-thermo">
+        <span class="unit-number">Unit 6</span>
+        Thermodynamics
+      </div>
+      <div class="unit-cards">
+        <a href="./Unit-6/key-concepts.html" class="unit-card cat-thermo">
+          <span class="card-label">Key Concepts</span>
+        </a>
+        <a href="INSERT_U6_SYLLABUS" target="_blank" class="unit-card cat-thermo">
+          <span class="card-label">Syllabus</span>
+        </a>
+        <a href="INSERT_U6_LAB" target="_blank" class="unit-card cat-thermo">
+          <span class="card-label">Lab</span>
+          <span class="card-subtext">Thermochemistry</span>
+        </a>
+        <a href="INSERT_U6_RESOURCES" target="_blank" class="unit-card cat-thermo">
+          <span class="card-label">Resources</span>
+        </a>
       </div>
     </section>
 
+    <!-- ═══ UNIT 7 ═══ -->
     <section id="unit-7" class="unit-section">
-      <h2> Unit 7: Equilibrium</h2>
-      <div class="card-grid">
-        <div class="card cat-equilibrium">
-          <div class="card-content">
-            <h3>Equilibrium Constant (K)</h3>
-            <p>Construct dynamic ICE tables, write equilibrium expressions, and compare Q vs. K to predict shifting directions.</p>
-          </div>
-          <a href="./Unit-7/eq-constant.html" class="study-btn btn-equilibrium">Study Section →</a>
-        </div>
-        <div class="card cat-equilibrium">
-          <div class="card-content">
-            <h3>Le Chatelier's Principle</h3>
-            <p>Describe system shifts when stressed by modifications in temperature, pressure, volume, or concentration.</p>
-          </div>
-          <a href="./Unit-7/le-chatelier.html" class="study-btn btn-equilibrium">Study Section →</a>
-        </div>
+      <div class="unit-bubble bubble-equilibrium">
+        <span class="unit-number">Unit 7</span>
+        Equilibrium
+      </div>
+      <div class="unit-cards">
+        <a href="./Unit-7/key-concepts.html" class="unit-card cat-equilibrium">
+          <span class="card-label">Key Concepts</span>
+        </a>
+        <a href="INSERT_U7_SYLLABUS" target="_blank" class="unit-card cat-equilibrium">
+          <span class="card-label">Syllabus</span>
+        </a>
+        <a href="INSERT_U7_LAB" target="_blank" class="unit-card cat-equilibrium">
+          <span class="card-label">Lab</span>
+          <span class="card-subtext">Le Chat Lab</span>
+        </a>
+        <a href="INSERT_U7_RESOURCES" target="_blank" class="unit-card cat-equilibrium">
+          <span class="card-label">Resources</span>
+        </a>
       </div>
     </section>
 
+    <!-- ═══ UNIT 8 ═══ -->
     <section id="unit-8" class="unit-section">
-      <h2> Unit 8: Acids & Bases (HEAVY WEIGHT)</h2>
-      <div class="card-grid">
-        <div class="card cat-acids">
-          <div class="card-content">
-            <h3>pH, pOH, and Ka/Kb</h3>
-            <p>Evaluate calculations for strong and weak acids/bases, write proton-transfer reactions, and determine pH.</p>
-          </div>
-          <a href="./Unit-8/ph-calculations.html" class="study-btn btn-acids">Study Section →</a>
-        </div>
-        <div class="card cat-acids">
-          <div class="card-content">
-            <h3>Titrations & Buffers</h3>
-            <p>Analyze weak-strong titration curves, locate the equivalence and half-equivalence points, and calculate buffer capacity.</p>
-          </div>
-          <a href="./Unit-8/titrations-buffers.html" class="study-btn btn-acids">Study Section →</a>
-        </div>
+      <div class="unit-bubble bubble-acids">
+        <span class="unit-number">Unit 8</span>
+        Acids &amp; Bases
+      </div>
+      <div class="unit-cards">
+        <a href="./Unit-8/key-concepts.html" class="unit-card cat-acids">
+          <span class="card-label">Key Concepts</span>
+        </a>
+        <a href="INSERT_U8_SYLLABUS" target="_blank" class="unit-card cat-acids">
+          <span class="card-label">Syllabus</span>
+        </a>
+        <a href="#" class="unit-card cat-acids multi-lab"
+           data-labs='[{"name":"Titration Lab","url":"INSERT_TITRATION_LAB_LINK"},{"name":"Buffer Lab","url":"INSERT_BUFFER_LAB_LINK"},{"name":"Ksp Titration Lab","url":"INSERT_KSP_LAB_LINK"}]'>
+          <span class="card-label">Lab</span>
+          <span class="card-subtext">Titration &amp; Buffer</span>
+        </a>
+        <a href="INSERT_U8_RESOURCES" target="_blank" class="unit-card cat-acids">
+          <span class="card-label">Resources</span>
+        </a>
       </div>
     </section>
 
+    <!-- ═══ UNIT 9 ═══ -->
     <section id="unit-9" class="unit-section">
-      <h2> Unit 9: Applications of Thermodynamics</h2>
-      <div class="card-grid">
-        <div class="card cat-entropy">
-          <div class="card-content">
-            <h3>Entropy & Free Energy</h3>
-            <p>Determine thermodynamically favorable processes using ΔG = ΔH - TΔS and link those variables to equilibrium values.</p>
-          </div>
-          <a href="./Unit-9/entropy-free-energy.html" class="study-btn btn-entropy">Study Section →</a>
-        </div>
-        <div class="card cat-entropy">
-          <div class="card-content">
-            <h3>Galvanic & Electrolytic Cells</h3>
-            <p>Design battery systems, calculate cell potential (E°cell), trace electron/anion transfers, and apply Faraday's laws.</p>
-          </div>
-          <a href="./Unit-9/electrochemistry.html" class="study-btn btn-entropy">Study Section →</a>
-        </div>
+      <div class="unit-bubble bubble-entropy">
+        <span class="unit-number">Unit 9 ⭐️</span>
+        Applications of Thermodynamics
+      </div>
+      <div class="unit-cards">
+        <a href="./Unit-9/key-concepts.html" class="unit-card cat-entropy">
+          <span class="card-label">Key Concepts</span>
+        </a>
+        <a href="INSERT_U9_SYLLABUS" target="_blank" class="unit-card cat-entropy">
+          <span class="card-label">Syllabus</span>
+        </a>
+        <a href="#" class="unit-card cat-entropy multi-lab"
+           data-labs='[{"name":"MAX PD Lab","url":"INSERT_MAX_PD_LAB_LINK"},{"name":"Free Energy Lab","url":"INSERT_FREE_ENERGY_LAB_LINK"}]'>
+          <span class="card-label">Lab</span>
+          <span class="card-subtext">MAX PD &amp; Free Energy</span>
+        </a>
+        <a href="INSERT_U9_RESOURCES" target="_blank" class="unit-card cat-entropy">
+          <span class="card-label">Resources</span>
+        </a>
       </div>
     </section>
 
+    <!-- ═══ LESSON SUPPLEMENTS ═══ -->
+    <section id="supplements" class="unit-section">
+      <div class="unit-bubble" style="background:var(--cayman-gradient);">
+        <span class="unit-number">Resources</span>
+        Lesson Supplements &amp; Answer Keys
+      </div>
+      <p style="margin-bottom:1.1rem;color:var(--text-muted);font-size:0.82rem;padding:0 2px;line-height:1.5;">
+        Organized by AP Unit, matched to textbook chapters.
+        &nbsp;<strong style="color:var(--text-main);">Solid</strong> = Lesson Supplement &nbsp;·&nbsp;
+        <strong style="color:var(--text-muted);font-style:italic;">Dashed</strong> = Answer Key
+      </p>
+
+      <div class="supplement-grid">
+
+        <!-- Unit 1: Ch 3 separate from Ch 7-8 -->
+        <div class="unit-group-box">
+          <div class="unit-group-label">Unit 1 — Atomic Structure</div>
+          <a href="https://docs.google.com/document/d/1bJ_H7xKdKfbTgPbia8G6o_m__SPIrngmrLDWJTX_gAo/edit" target="_blank" class="subsection-item cat-structure">
+            <span class="subsection-num num-structure">Ch 3</span>
+            <span class="subsection-title">The Mole — Lesson Supplement</span>
+            <span class="subsection-arrow">↗</span>
+          </a>
+          <a href="INSERT_CH3_KEY_LINK" target="_blank" class="subsection-item cat-structure is-key">
+            <span class="subsection-num num-key-structure">Key</span>
+            <span class="subsection-title">Ch 3 Answer Key</span>
+            <span class="subsection-arrow">↗</span>
+          </a>
+          <a href="https://docs.google.com/document/d/1bJ_H7xKdKfbTgPbia8G6o_m__SPIrngmrLDWJTX_gAo/edit" target="_blank" class="subsection-item cat-structure">
+            <span class="subsection-num num-structure">Ch 7–8</span>
+            <span class="subsection-title">Electronic Structure — Lesson Supplement</span>
+            <span class="subsection-arrow">↗</span>
+          </a>
+          <a href="https://docs.google.com/document/d/1rVj79jC_5oH2C6e_tL7mE60N3vjF9YwP-mS9gA8g1P4/edit" target="_blank" class="subsection-item cat-structure is-key">
+            <span class="subsection-num num-key-structure">Key</span>
+            <span class="subsection-title">Ch 7–8 Answer Key</span>
+            <span class="subsection-arrow">↗</span>
+          </a>
+        </div>
+
+        <!-- Unit 2: Ch 9-10 -->
+        <div class="unit-group-box">
+          <div class="unit-group-label">Unit 2 — Compound Structure</div>
+          <a href="https://docs.google.com/document/d/1PAlXU2mMoYq5F1H6KaHTNmnLMsukuxUdRC-VGUIf2l4/edit?tab=t.0" target="_blank" class="subsection-item cat-bonding">
+            <span class="subsection-num num-bonding">Ch 9–10</span>
+            <span class="subsection-title">Molecular Structure — Lesson Supplement</span>
+            <span class="subsection-arrow">↗</span>
+          </a>
+          <a href="https://drive.google.com/file/d/1Ny_M-lhotW1p3zaWUQxDizHRtptEZy9h/view" target="_blank" class="subsection-item cat-bonding is-key">
+            <span class="subsection-num num-key-bonding">Key</span>
+            <span class="subsection-title">Ch 9–10 Answer Key</span>
+            <span class="subsection-arrow">↗</span>
+          </a>
+        </div>
+
+        <!-- Unit 3: Ch 5 separate from Ch 11 -->
+        <div class="unit-group-box">
+          <div class="unit-group-label">Unit 3 — IMFs &amp; Gases</div>
+          <a href="INSERT_CH5_SUPPLEMENT_LINK" target="_blank" class="subsection-item cat-imfs">
+            <span class="subsection-num num-imfs">Ch 5</span>
+            <span class="subsection-title">Gas Chemistry — Lesson Supplement</span>
+            <span class="subsection-arrow">↗</span>
+          </a>
+          <a href="INSERT_CH5_KEY_LINK" target="_blank" class="subsection-item cat-imfs is-key">
+            <span class="subsection-num num-key-imfs">Key</span>
+            <span class="subsection-title">Ch 5 Answer Key</span>
+            <span class="subsection-arrow">↗</span>
+          </a>
+          <a href="INSERT_CH11_SUPPLEMENT_LINK" target="_blank" class="subsection-item cat-imfs">
+            <span class="subsection-num num-imfs">Ch 11</span>
+            <span class="subsection-title">IMF &amp; Properties — Lesson Supplement</span>
+            <span class="subsection-arrow">↗</span>
+          </a>
+          <a href="INSERT_CH11_KEY_LINK" target="_blank" class="subsection-item cat-imfs is-key">
+            <span class="subsection-num num-key-imfs">Key</span>
+            <span class="subsection-title">Ch 11 Answer Key</span>
+            <span class="subsection-arrow">↗</span>
+          </a>
+        </div>
+
+        <!-- Unit 4: Ch 4 -->
+        <div class="unit-group-box">
+          <div class="unit-group-label">Unit 4 — Chemical Reactions</div>
+          <a href="INSERT_CH4_SUPPLEMENT_LINK" target="_blank" class="subsection-item cat-reactions">
+            <span class="subsection-num num-reactions">Ch 4</span>
+            <span class="subsection-title">Stoichiometry — Lesson Supplement</span>
+            <span class="subsection-arrow">↗</span>
+          </a>
+          <a href="INSERT_CH4_KEY_LINK" target="_blank" class="subsection-item cat-reactions is-key">
+            <span class="subsection-num num-key-reactions">Key</span>
+            <span class="subsection-title">Ch 4 Answer Key</span>
+            <span class="subsection-arrow">↗</span>
+          </a>
+        </div>
+
+        <!-- Unit 5: Ch 13 -->
+        <div class="unit-group-box">
+          <div class="unit-group-label">Unit 5 — Kinetics</div>
+          <a href="INSERT_CH13_SUPPLEMENT_LINK" target="_blank" class="subsection-item cat-kinetics">
+            <span class="subsection-num num-kinetics">Ch 13</span>
+            <span class="subsection-title">Kinetics — Lesson Supplement</span>
+            <span class="subsection-arrow">↗</span>
+          </a>
+          <a href="INSERT_CH13_KEY_LINK" target="_blank" class="subsection-item cat-kinetics is-key">
+            <span class="subsection-num num-key-kinetics">Key</span>
+            <span class="subsection-title">Ch 13 Answer Key</span>
+            <span class="subsection-arrow">↗</span>
+          </a>
+        </div>
+
+        <!-- Unit 6: Ch 6 -->
+        <div class="unit-group-box">
+          <div class="unit-group-label">Unit 6 — Thermodynamics</div>
+          <a href="INSERT_CH6_SUPPLEMENT_LINK" target="_blank" class="subsection-item cat-thermo">
+            <span class="subsection-num num-thermo">Ch 6</span>
+            <span class="subsection-title">Thermochemistry — Lesson Supplement</span>
+            <span class="subsection-arrow">↗</span>
+          </a>
+          <a href="INSERT_CH6_KEY_LINK" target="_blank" class="subsection-item cat-thermo is-key">
+            <span class="subsection-num num-key-thermo">Key</span>
+            <span class="subsection-title">Ch 6 Answer Key</span>
+            <span class="subsection-arrow">↗</span>
+          </a>
+        </div>
+
+        <!-- Unit 7: Ch 14 -->
+        <div class="unit-group-box">
+          <div class="unit-group-label">Unit 7 — Equilibrium</div>
+          <a href="INSERT_CH14_SUPPLEMENT_LINK" target="_blank" class="subsection-item cat-equilibrium">
+            <span class="subsection-num num-equilibrium">Ch 14</span>
+            <span class="subsection-title">Equilibrium — Lesson Supplement</span>
+            <span class="subsection-arrow">↗</span>
+          </a>
+          <a href="INSERT_CH14_KEY_LINK" target="_blank" class="subsection-item cat-equilibrium is-key">
+            <span class="subsection-num num-key-equilibrium">Key</span>
+            <span class="subsection-title">Ch 14 Answer Key</span>
+            <span class="subsection-arrow">↗</span>
+          </a>
+        </div>
+
+        <!-- Unit 8: Ch 15-16 -->
+        <div class="unit-group-box">
+          <div class="unit-group-label">Unit 8 — Acids &amp; Bases</div>
+          <a href="INSERT_CH15_16_SUPPLEMENT_LINK" target="_blank" class="subsection-item cat-acids">
+            <span class="subsection-num num-acids">Ch 15–16</span>
+            <span class="subsection-title">Acids &amp; Bases — Lesson Supplement</span>
+            <span class="subsection-arrow">↗</span>
+          </a>
+          <a href="INSERT_CH15_16_KEY_LINK" target="_blank" class="subsection-item cat-acids is-key">
+            <span class="subsection-num num-key-acids">Key</span>
+            <span class="subsection-title">Ch 15–16 Answer Key</span>
+            <span class="subsection-arrow">↗</span>
+          </a>
+        </div>
+
+        <!-- Unit 9: Ch 17 separate from Ch 18 -->
+        <div class="unit-group-box">
+          <div class="unit-group-label">Unit 9 — Applications of Thermo</div>
+          <a href="INSERT_CH17_SUPPLEMENT_LINK" target="_blank" class="subsection-item cat-entropy">
+            <span class="subsection-num num-entropy">Ch 17</span>
+            <span class="subsection-title">Spontaneity &amp; Free Energy — Supplement</span>
+            <span class="subsection-arrow">↗</span>
+          </a>
+          <a href="INSERT_CH17_KEY_LINK" target="_blank" class="subsection-item cat-entropy is-key">
+            <span class="subsection-num num-key-entropy">Key</span>
+            <span class="subsection-title">Ch 17 Answer Key</span>
+            <span class="subsection-arrow">↗</span>
+          </a>
+          <a href="INSERT_CH18_SUPPLEMENT_LINK" target="_blank" class="subsection-item cat-entropy">
+            <span class="subsection-num num-entropy">Ch 18</span>
+            <span class="subsection-title">Electrochemistry — Supplement</span>
+            <span class="subsection-arrow">↗</span>
+          </a>
+          <a href="INSERT_CH18_KEY_LINK" target="_blank" class="subsection-item cat-entropy is-key">
+            <span class="subsection-num num-key-entropy">Key</span>
+            <span class="subsection-title">Ch 18 Answer Key</span>
+            <span class="subsection-arrow">↗</span>
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ═══ QUIZ ═══ -->
     <section id="quiz" class="unit-section">
-      <h2> AP Chemistry Practice Quiz Portal</h2>
-      <p style="margin-bottom: 2rem; color: var(--text-muted);">Test your knowledge with challenging questions mimicking real AP Chem exams. Embedded practice quiz loading below.</p>
-      
-      <div style="background: white; padding: 1rem; border-radius: 12px; border: 1px solid var(--border-color); box-shadow: 0 4px 6px rgba(0,0,0,0.02);">
-        <p><em>[Your Google Forms Embed Link goes here]</em></p>
+      <div class="unit-bubble" style="background:var(--cayman-gradient);">
+        <span class="unit-number">Practice</span>
+        AP Chemistry Practice Quiz Portal
+      </div>
+      <p style="margin-bottom:1rem;color:var(--text-muted);font-size:0.875rem;">
+        Test your knowledge with challenging questions mimicking real AP Chem exams.
+      </p>
+      <div class="quiz-placeholder">
+        <em>[Your Google Forms embed link goes here]</em>
       </div>
     </section>
 
   </main>
+
+  <!-- ═══════════════ MODAL ═══════════════ -->
+  <div id="lab-modal" class="modal-overlay">
+    <div class="modal-content">
+      <button class="modal-close" aria-label="Close">&times;</button>
+      <h3 class="modal-title">Choose a Lab</h3>
+      <div class="modal-buttons" id="modal-buttons-container"></div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ SCRIPTS ═══════════════ -->
+  <script>
+    /* 1 — Scroll spy */
+    const sections  = document.querySelectorAll('section[id]');
+    const navLinks  = document.querySelectorAll('.sidebar-nav a');
+    const linkMap   = {};
+    navLinks.forEach(l => { linkMap[l.getAttribute('href').replace('#','')] = l; });
+
+    const spy = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const link = linkMap[entry.target.id];
+        if (!link) return;
+        navLinks.forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+        link.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      });
+    }, { rootMargin: '-15% 0px -75% 0px', threshold: 0 });
+
+    sections.forEach(s => { if (s.id !== 'hero') spy.observe(s); });
+
+    /* 2 — Multi-lab modal */
+    const modal     = document.getElementById('lab-modal');
+    const container = document.getElementById('modal-buttons-container');
+    const closeBtn  = document.querySelector('.modal-close');
+
+    document.querySelectorAll('.multi-lab').forEach(card => {
+      card.addEventListener('click', e => {
+        e.preventDefault();
+        const labs = JSON.parse(card.getAttribute('data-labs'));
+        container.innerHTML = '';
+        labs.forEach(lab => {
+          const btn = document.createElement('a');
+          btn.href = lab.url;
+          btn.target = '_blank';
+          btn.className = 'modal-lab-btn';
+          btn.textContent = lab.name;
+          container.appendChild(btn);
+        });
+        modal.classList.add('active');
+      });
+    });
+
+    closeBtn.addEventListener('click', () => modal.classList.remove('active'));
+    modal.addEventListener('click', e => { if (e.target === modal) modal.classList.remove('active'); });
+
+    /* 3 — Close modal on Escape */
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') modal.classList.remove('active'); });
+  </script>
 
 </body>
 </html>

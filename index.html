@@ -1,6 +1,3 @@
----
-layout: none
----
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,7 +12,6 @@ layout: none
     /* ── Variables ─────────────────────────────── */
     :root {
       --bg-main:       #ffffff;
-      --sidebar-bg:    #ffffff;
       --text-main:     #11161f;
       --text-muted:    #69717d;
       --text-faint:    #9aa1ac;
@@ -24,7 +20,6 @@ layout: none
       --cayman-start:  #155799;
       --cayman-end:    #159957;
       --cayman-gradient: linear-gradient(125deg, var(--cayman-start), var(--cayman-end));
-      --sidebar-width: 280px;
       --radius-md:     10px;
       --radius-lg:     12px;
       --shadow-card:   0 1px 2px rgba(17,22,31,.04);
@@ -34,7 +29,8 @@ layout: none
 
     /* ── Reset ─────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body              { margin: 0; padding: 0; } 
+    html, body              { margin: 0; padding: 0; }
+    body                    { overflow-x: hidden; }
 
     html {
       scroll-behavior: smooth;
@@ -47,119 +43,140 @@ layout: none
 
     section[id] { scroll-margin-top: 0; }
 
-    /* ═══════════════════════════════════════════
-       SIDEBAR
-    ═══════════════════════════════════════════ */
-    aside {
-      position: fixed;
-      top: 0; left: 0;
-      width: var(--sidebar-width);
-      height: 100vh;
-      background: var(--sidebar-bg);
-      border-right: 1px solid var(--border-color);
-      padding: 1.5rem 0.9rem 2rem;
-      overflow-y: auto;
-      display: flex;
-      flex-direction: column;
-      gap: 0;
+    /* ── Scroll reveal ────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
     }
-
-    .sidebar-brand {
-      font-size: 0.9rem;
-      font-weight: 700;
-      color: var(--text-main);
-      margin-bottom: 1.5rem;
-      padding: 0.25rem 0.6rem 1.25rem;
-      letter-spacing: -0.01em;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      border-bottom: 1px solid var(--border-color);
-    }
-    .sidebar-brand span { color: var(--cayman-start); }
-
-    .sidebar-nav {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 0.12rem;
-    }
-
-    .sidebar-nav a {
-      text-decoration: none;
-      color: var(--text-muted);
-      padding: 0.52rem 0.65rem;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      font-weight: 500;
-      font-size: 0.83rem;
-      line-height: 1.4;
-      transition: background var(--transition), color var(--transition);
-    }
-
-    .sidebar-nav a:hover {
-      background: #f5f6f8;
-      color: var(--text-main);
-    }
-
-    .sidebar-nav a.active { font-weight: 600; color: var(--text-main); background: #f3f4f6; }
-    .sidebar-nav a.active[data-unit="e"] { color:#7c3aed; background:#f5f3ff; }
-    .sidebar-nav a.active[data-unit="r"] { color:#155799; background:#eef5fb; }
-    .sidebar-nav a.active[data-unit="q"] { color:#159957; background:#eefaf3; }
-
-    .nav-dot {
-      width: 7px; height: 7px;
-      border-radius: 50%;
-      flex-shrink: 0;
-      opacity: 0.55;
-      transition: opacity 0.2s;
-    }
-    .sidebar-nav a:hover .nav-dot,
-    .sidebar-nav a.active .nav-dot { opacity: 1; }
-
-    .sidebar-nav li.nav-divider {
-      margin: 0.55rem 0.5rem 0.45rem;
-      border-top: 1px solid var(--border-color);
-    }
+    .reveal.in { opacity: 1; transform: none; }
 
     /* ═══════════════════════════════════════════
        MAIN
     ═══════════════════════════════════════════ */
     main {
-      margin-left: var(--sidebar-width);
+      margin: 0 auto;
+      max-width: 1180px;
       min-height: 100vh;
     }
 
     .hero {
       background: #ffffff;
       color: var(--text-main);
-      padding: 3rem 3rem 2.75rem;
+      padding: 4rem 3rem 3.25rem;
       border-bottom: 1px solid var(--border-color);
       position: relative;
-      overflow: hidden;
     }
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: 50%; right: -140px;
+      width: 560px; height: 560px;
+      margin-top: -280px;
+      background: radial-gradient(circle at center,
+        rgba(21,87,153,.26) 0%,
+        rgba(37,99,235,.17) 30%,
+        rgba(96,165,250,.09) 54%,
+        rgba(96,165,250,.035) 67%,
+        transparent 78%);
+      filter: blur(8px);
+      -webkit-mask-image: linear-gradient(to bottom, #000 45%, transparent 72%);
+              mask-image: linear-gradient(to bottom, #000 45%, transparent 72%);
+      animation: hero-drift 16s ease-in-out infinite alternate;
+      pointer-events: none;
+    }
+    @keyframes hero-drift {
+      0%   { transform: scale(1); }
+      100% { transform: scale(1.12); }
+    }
+    .hero > * { position: relative; z-index: 1; }
+
     .hero h1 {
-      font-size: 2.15rem;
+      font-size: 2.3rem;
       font-weight: 800;
-      margin-bottom: 0.55rem;
+      margin-bottom: 0.6rem;
       letter-spacing: -0.035em;
-      line-height: 1.15;
-      position: relative;
+      line-height: 1.12;
+      animation: rise-in 0.6s ease 0.08s both;
+    }
+    .hero h1 .accent {
+      background: var(--cayman-gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
     .hero p {
       font-size: 1rem;
       color: var(--text-muted);
       max-width: 560px;
       font-weight: 400;
-      position: relative;
+      animation: rise-in 0.6s ease 0.16s both;
     }
+    @keyframes rise-in {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: none; }
+    }
+
+    /* ── Animated water (H₂O) molecule ────────── */
+    .hero-molecule {
+      position: absolute;
+      top: 50%; right: 3.25rem;
+      transform: translateY(-50%);
+      width: 176px; height: 176px;
+      animation: mol-float 7s ease-in-out infinite;
+      pointer-events: none;
+      z-index: 0;
+    }
+    @keyframes mol-float {
+      0%, 100% { transform: translateY(-50%); }
+      50%      { transform: translateY(calc(-50% - 12px)); }
+    }
+    .hero-molecule .bond {
+      stroke: #c4d2df;
+      stroke-width: 6;
+      stroke-linecap: round;
+    }
+    .hero-molecule .ring {
+      fill: none;
+      stroke: #e3ebf2;
+      stroke-width: 1.5;
+      stroke-dasharray: 3 8;
+      transform-box: view-box;
+      transform-origin: 90px 90px;
+      animation: ring-spin 40s linear infinite;
+    }
+    @keyframes ring-spin { to { transform: rotate(360deg); } }
+    .hero-molecule .atom-o {
+      fill: #dc2626;
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: o-pulse 4.5s ease-in-out infinite;
+    }
+    @keyframes o-pulse {
+      0%, 100% { transform: scale(1); }
+      50%      { transform: scale(1.05); }
+    }
+    .hero-molecule .atom-h { fill: #f1f5f9; stroke: #cbd5e1; stroke-width: 1.5; }
+    .hero-molecule .electron-orbit {
+      transform-box: view-box;
+      transform-origin: 90px 90px;
+      animation: orbit 9s linear infinite;
+    }
+    @keyframes orbit { to { transform: rotate(360deg); } }
+    .hero-molecule .electron { fill: #159957; }
+    .hero-molecule .mol-label {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 700;
+      text-anchor: middle;
+      dominant-baseline: central;
+    }
+    .hero-molecule .o-label { fill: #ffffff; font-size: 19px; }
+    .hero-molecule .h-label { fill: #64748b; font-size: 11px; }
+    @media (max-width: 720px) { .hero-molecule { display: none; } }
 
     .unit-section {
       padding: 2.75rem 3rem 3rem;
       border-bottom: 1px solid var(--border-color);
-      max-width: 1100px;
     }
 
     /* ── Section Header ───────────────────────── */
@@ -236,8 +253,14 @@ layout: none
       flex-direction: column;
       gap: 0.45rem;
       box-shadow: var(--shadow-card);
-      scroll-margin-top: 2rem; /* Keeps scroll spy from clipping the top */
+      scroll-margin-top: 2rem;
+      transition: box-shadow var(--transition), border-color var(--transition);
     }
+    .unit-group-box:hover {
+      box-shadow: var(--shadow-hover);
+      border-color: var(--border-strong);
+    }
+    .unit-group-box.highlight:hover { border-color: #f5c97e; }
 
     .unit-group-label {
       font-size: 0.95rem;
@@ -463,37 +486,80 @@ layout: none
     .modal-link .ml-arrow { margin-left: auto; color: var(--text-faint); flex-shrink: 0; }
 
     /* ═══════════════════════════════════════════
-       QUIZ PLACEHOLDER
+       CONTACT FOOTER
     ═══════════════════════════════════════════ */
-    .quiz-placeholder {
-      background: #fbfcfd;
-      padding: 2rem 1.5rem;
-      border-radius: var(--radius-lg);
-      border: 1px dashed var(--border-strong);
+    .site-footer {
+      padding: 2.75rem 3rem 3.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+    }
+    .site-footer h2 {
+      font-size: 1.25rem;
+      font-weight: 800;
+      letter-spacing: -0.025em;
+    }
+    .site-footer .footer-sub {
       color: var(--text-muted);
-      margin-top: 1rem;
       font-size: 0.9rem;
-      text-align: center;
+      margin-bottom: 0.35rem;
+    }
+    .contact-row { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+    .contact-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      text-decoration: none;
+      color: var(--text-main);
+      border: 1px solid var(--border-color);
+      border-radius: 999px;
+      padding: 0.55rem 0.95rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      box-shadow: var(--shadow-card);
+      transition: background var(--transition), border-color var(--transition), transform var(--transition), box-shadow var(--transition);
+    }
+    .contact-chip:hover {
+      background: #f7f8fa;
+      border-color: var(--border-strong);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-hover);
+    }
+    .contact-chip .ico { color: var(--cayman-start); font-size: 0.95rem; }
+    .footer-credit {
+      margin-top: 1.4rem;
+      font-size: 0.78rem;
+      color: var(--text-faint);
+    }
+
+    /* ── Respect reduced-motion preferences ───── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+      }
+      .reveal { opacity: 1; transform: none; }
     }
   </style>
 </head>
 <body>
 
-  <aside>
-    <div class="sidebar-brand">AP <span>Chem</span> Review</div>
-    <ul class="sidebar-nav">
-      <li><a href="#experiences" data-unit="e"><span class="nav-dot" style="background:#8b5cf6"></span>My Experiences</a></li>
-      <li class="nav-divider"></li>
-      <li><a href="#resources" data-unit="r"><span class="nav-dot" style="background:#155799"></span>Resources Hub</a></li>
-      <li class="nav-divider"></li>
-      <li><a href="#quiz" data-unit="q"><span class="nav-dot" style="background:#159957"></span>Practice Quiz</a></li>
-    </ul>
-  </aside>
-
   <main>
 
     <section id="hero" class="hero">
-      <h1>AP Chemistry Exam Review Resource</h1>
+      <svg class="hero-molecule" viewBox="0 0 180 180" aria-hidden="true" role="img" aria-label="Water molecule">
+        <circle class="ring" cx="90" cy="90" r="70"></circle>
+        <g class="electron-orbit"><circle class="electron" cx="90" cy="20" r="4.5"></circle></g>
+        <line class="bond" x1="90" y1="78" x2="49" y2="110"></line>
+        <line class="bond" x1="90" y1="78" x2="131" y2="110"></line>
+        <circle class="atom-h" cx="49" cy="110" r="14"></circle>
+        <circle class="atom-h" cx="131" cy="110" r="14"></circle>
+        <circle class="atom-o" cx="90" cy="78" r="23"></circle>
+        <text class="mol-label o-label" x="90" y="78">O</text>
+        <text class="mol-label h-label" x="49" y="110">H</text>
+        <text class="mol-label h-label" x="131" y="110">H</text>
+      </svg>
+      <h1>AP <span class="accent">Chemistry</span> Exam Review Resource</h1>
       <p>2026 Project made by Max H.</p>
     </section>
 
@@ -513,7 +579,7 @@ layout: none
         Syllabi, Labs, Supplements &amp; Answer Keys
       </div>
       <p style="margin-bottom:1.4rem;color:var(--text-muted);font-size:0.82rem;padding:0 2px;line-height:1.5;">
-        Organized by AP Unit and chapter — syllabi, labs, lesson supplements, quizzes, resources &amp; more.
+        Organized by AP Unit and chapter — syllabi, labs, lesson supplements, videos, answer keys &amp; more.
         &nbsp;<strong style="color:var(--text-main);">Solid badge</strong> = resource &nbsp;·&nbsp;
         <strong style="color:var(--text-muted);font-style:italic;">Dashed badge</strong> = answer key / solutions
       </p>
@@ -1009,17 +1075,15 @@ layout: none
       </div>
     </section>
 
-    <section id="quiz" class="unit-section">
-      <div class="unit-bubble">
-        AP Chemistry Practice Quiz Portal
+    <footer id="contact" class="site-footer">
+      <h2>Get in touch</h2>
+      <p class="footer-sub">Find a bug or want to ask more questions? Feel free to reach out.</p>
+      <div class="contact-row">
+        <a class="contact-chip" href="mailto:maxhong818@gmail.com"><span class="ico">✉</span>maxhong818@gmail.com</a>
+        <a class="contact-chip" href="tel:+17344508572"><span class="ico">☎</span>734-450-8572</a>
       </div>
-      <p style="margin-bottom:1rem;color:var(--text-muted);font-size:0.875rem;">
-        Test your knowledge with challenging questions mimicking real AP Chem exams.
-      </p>
-      <div class="quiz-placeholder">
-        <em>INSERT_Practice_Quiz_Google_Form_Embed_Link</em>
-      </div>
-    </section>
+      <p class="footer-credit">AP Chemistry Exam Review Resource · 2026 Project made by Max H.</p>
+    </footer>
 
   </main>
 
@@ -1062,28 +1126,19 @@ layout: none
     modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
-    /* Scroll spy updated to track the new sections and grid blocks */
-    const targets = document.querySelectorAll('section[id], .unit-group-box[id]');
-    const navLinks = document.querySelectorAll('.sidebar-nav a');
-    const linkMap = {};
-    
-    navLinks.forEach(l => { 
-      const href = l.getAttribute('href').replace('#','');
-      if (href) linkMap[href] = l; 
-    });
+    /* ── Scroll reveal for cards & sections ── */
+    const revealEls = document.querySelectorAll('.experience-link, .unit-group-box, #resources > .unit-bubble');
+    revealEls.forEach(el => el.classList.add('reveal'));
 
-    const spy = new IntersectionObserver(entries => {
+    const revealObserver = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (!entry.isIntersecting) return;
-        const link = linkMap[entry.target.id];
-        if (!link) return;
-        navLinks.forEach(l => l.classList.remove('active'));
-        link.classList.add('active');
-        link.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+        entry.target.classList.add('in');
+        revealObserver.unobserve(entry.target);
       });
-    }, { rootMargin: '-15% 0px -75% 0px', threshold: 0 });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
 
-    targets.forEach(t => { if (t.id !== 'hero') spy.observe(t); });
+    revealEls.forEach(el => revealObserver.observe(el));
   </script>
 
 </body>

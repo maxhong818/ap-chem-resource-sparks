@@ -157,13 +157,6 @@
       50%      { transform: scale(1.05); }
     }
     .hero-molecule .atom-h { fill: #f1f5f9; stroke: #cbd5e1; stroke-width: 1.5; }
-    .hero-molecule .electron-orbit {
-      transform-box: view-box;
-      transform-origin: 90px 90px;
-      animation: orbit 9s linear infinite;
-    }
-    @keyframes orbit { to { transform: rotate(360deg); } }
-    .hero-molecule .electron { fill: #159957; }
     .hero-molecule .mol-label {
       font-family: 'Plus Jakarta Sans', sans-serif;
       font-weight: 700;
@@ -549,7 +542,6 @@
     <section id="hero" class="hero">
       <svg class="hero-molecule" viewBox="0 0 180 180" aria-hidden="true" role="img" aria-label="Water molecule">
         <circle class="ring" cx="90" cy="90" r="70"></circle>
-        <g class="electron-orbit"><circle class="electron" cx="90" cy="20" r="4.5"></circle></g>
         <line class="bond" x1="90" y1="78" x2="49" y2="110"></line>
         <line class="bond" x1="90" y1="78" x2="131" y2="110"></line>
         <circle class="atom-h" cx="49" cy="110" r="14"></circle>

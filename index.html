@@ -372,6 +372,97 @@ layout: none
     .num-key-entropy    { background:transparent; border:2px solid #be185d; color:#be185d; }
 
     /* ═══════════════════════════════════════════
+       POPUP / MODAL (grouped multi-link items)
+    ═══════════════════════════════════════════ */
+    .subsection-item.has-popup { cursor: pointer; }
+    .popup-data { display: none; }
+
+    .subsection-count {
+      font-size: 0.6rem;
+      font-weight: 700;
+      color: var(--text-faint);
+      background: #f3f4f6;
+      border: 1px solid var(--border-color);
+      border-radius: 999px;
+      padding: 0.08rem 0.42rem;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(17,22,31,.45);
+      -webkit-backdrop-filter: blur(2px);
+      backdrop-filter: blur(2px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      z-index: 100;
+    }
+    .modal-overlay.open { display: flex; }
+
+    .modal-card {
+      background: #fff;
+      border-radius: var(--radius-lg);
+      max-width: 460px;
+      width: 100%;
+      box-shadow: 0 12px 40px rgba(17,22,31,.22);
+      overflow: hidden;
+      animation: modal-in .18s ease;
+    }
+    @keyframes modal-in {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: none; }
+    }
+    .modal-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1.05rem 1.25rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .modal-head h3 { font-size: 1rem; font-weight: 700; letter-spacing: -.01em; }
+    .modal-close {
+      border: none;
+      background: #f3f4f6;
+      border-radius: 8px;
+      width: 30px; height: 30px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      color: var(--text-muted);
+      flex-shrink: 0;
+      transition: background var(--transition), color var(--transition);
+    }
+    .modal-close:hover { background: #e5e7eb; color: var(--text-main); }
+    .modal-body {
+      padding: 0.9rem 1.25rem 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      max-height: 60vh;
+      overflow-y: auto;
+    }
+    .modal-link {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      padding: 0.65rem 0.7rem;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      text-decoration: none;
+      color: var(--text-main);
+      font-size: 0.85rem;
+      font-weight: 500;
+      line-height: 1.35;
+      transition: background var(--transition), border-color var(--transition);
+    }
+    .modal-link:hover { background: #f7f8fa; border-color: var(--border-strong); }
+    .modal-link .ml-arrow { margin-left: auto; color: var(--text-faint); flex-shrink: 0; }
+
+    /* ═══════════════════════════════════════════
        QUIZ PLACEHOLDER
     ═══════════════════════════════════════════ */
     .quiz-placeholder {
@@ -433,7 +524,7 @@ layout: none
           <div class="unit-group-label">Unit 1 — Atomic Structure</div>
 
           <div class="chapter-label">Ch 3 — The Mole</div>
-          <a href="INSERT_U1_SYLLABUS" target="_blank" class="subsection-item cat-structure">
+          <a href="https://docs.google.com/document/d/1YuBvjQcyJsCoYUT7quiOGnpEzKPQGsB7UNRfAmpP1bU/edit?usp=classroom_web&authuser=0" target="_blank" class="subsection-item cat-structure">
             <span class="subsection-num num-structure">Syl</span>
             <span class="subsection-title">Chapter 3 Syllabus</span>
             <span class="subsection-arrow">↗</span>
@@ -443,7 +534,7 @@ layout: none
             <span class="subsection-title">The Mole — Lesson Supplement</span>
             <span class="subsection-arrow">↗</span>
           </a>
-          <a href="INSERT_CH3_DETERMINATION_LAB" target="_blank" class="subsection-item cat-structure">
+          <a href="https://docs.google.com/document/d/1a9REP9uSw89UoU3gg_qcmK-HrL8bYVdwzjrFC7nUINQ/edit?usp=classroom_web&authuser=0" target="_blank" class="subsection-item cat-structure">
             <span class="subsection-num num-structure">Lab</span>
             <span class="subsection-title">Determination of a Compound by Mass</span>
             <span class="subsection-arrow">↗</span>
@@ -455,7 +546,7 @@ layout: none
           </a>
 
           <div class="chapter-label">Ch 7–8 — Electronic Structure</div>
-          <a href="INSERT_CH78_SYLLABUS" target="_blank" class="subsection-item cat-structure">
+          <a href="https://docs.google.com/document/d/1wjQ2dYnVK4UZChkI7JUEMOZBefnR1y1mERZY9TOmJeE/edit?usp=classroom_web&authuser=0" target="_blank" class="subsection-item cat-structure">
             <span class="subsection-num num-structure">Syl</span>
             <span class="subsection-title">Ch 7–8 Unit Syllabus</span>
             <span class="subsection-arrow">↗</span>
@@ -465,22 +556,27 @@ layout: none
             <span class="subsection-title">Electronic Structure — Supplement</span>
             <span class="subsection-arrow">↗</span>
           </a>
-          <a href="INSERT_U1_LAB" target="_blank" class="subsection-item cat-structure">
+          <div class="subsection-item cat-structure has-popup" data-title="Active Metals Lab">
             <span class="subsection-num num-structure">Lab</span>
             <span class="subsection-title">Active Metals Lab</span>
+            <span class="subsection-count">+ rubric</span>
             <span class="subsection-arrow">↗</span>
-          </a>
-          <a href="INSERT_CH78_RESOURCES" target="_blank" class="subsection-item cat-structure">
-            <span class="subsection-num num-structure">Res</span>
-            <span class="subsection-title">Ch 7 &amp; 8 Resources</span>
-            <span class="subsection-arrow">↗</span>
-          </a>
-          <a href="INSERT_CH78_ADDITIONAL_PRACTICE" target="_blank" class="subsection-item cat-structure">
+            <div class="popup-data">
+              <a href="https://docs.google.com/document/d/121Q_8k1tUxBImk5R4VDKzzsIS76llumYP9Pg6IiQqMw/edit?usp=classroom_web&authuser=0">Lab Document</a>
+              <a href="https://docs.google.com/document/d/1d8Q58wZ6okd5RTSAY0lp-IPCk-VilRDLFuIIZvobDBk/edit?usp=classroom_web&authuser=0">Rubric</a>
+            </div>
+          </div>
+          <div class="subsection-item cat-structure has-popup" data-title="Additional Practice — Ch 7 &amp; 8">
             <span class="subsection-num num-structure">Res</span>
             <span class="subsection-title">Additional Practice</span>
+            <span class="subsection-count">2 links</span>
             <span class="subsection-arrow">↗</span>
-          </a>
-          <a href="INSERT_CH78_OPTIONAL_HW" target="_blank" class="subsection-item cat-structure">
+            <div class="popup-data">
+              <a href="https://docs.google.com/document/d/11NxbKQ58TsIl-fngRuNaogFji7AqHF8zxZX2X7h_pTI/edit?usp=classroom_web&authuser=0">Additional Practice</a>
+              <a href="https://drive.google.com/file/d/17ylqzdq_kOtiiCFYuhyrNV7vFfL_hjMA/view?usp=classroom_web&authuser=0">Answer Key</a>
+            </div>
+          </div>
+          <a href="https://drive.google.com/file/d/1lw9S0Vt7mRZPiH1NnfxeGtT_4IqaLvb9/view?usp=classroom_web&authuser=0" target="_blank" class="subsection-item cat-structure">
             <span class="subsection-num num-structure">HW</span>
             <span class="subsection-title">Optional Book Problems — Ch 7 &amp; 8</span>
             <span class="subsection-arrow">↗</span>
@@ -496,7 +592,7 @@ layout: none
           <div class="unit-group-label">Unit 2 — Compound Structure</div>
 
           <div class="chapter-label">Ch 9–10 — Molecular Structure &amp; Interactions</div>
-          <a href="INSERT_U2_SYLLABUS" target="_blank" class="subsection-item cat-bonding">
+          <a href="https://docs.google.com/document/d/1boAWaeV4GoN8SqtjV9nvpSIsIy4jWJU2MIXfuTSDJUY/edit?usp=classroom_web&authuser=0" target="_blank" class="subsection-item cat-bonding">
             <span class="subsection-num num-bonding">Syl</span>
             <span class="subsection-title">Ch 9 &amp; 10 Syllabus</span>
             <span class="subsection-arrow">↗</span>
@@ -506,21 +602,18 @@ layout: none
             <span class="subsection-title">Molecular Structure — Supplement</span>
             <span class="subsection-arrow">↗</span>
           </a>
-          <a href="INSERT_U2_LAB" target="_blank" class="subsection-item cat-bonding">
-            <span class="subsection-num num-bonding">Lab</span>
-            <span class="subsection-title">Modeling Lab</span>
-            <span class="subsection-arrow">↗</span>
-          </a>
-          <a href="INSERT_CH910_RESOURCES" target="_blank" class="subsection-item cat-bonding">
-            <span class="subsection-num num-bonding">Res</span>
-            <span class="subsection-title">Ch 9 &amp; 10 Resources</span>
-            <span class="subsection-arrow">↗</span>
-          </a>
-          <a href="INSERT_CH910_OPTIONAL_HW" target="_blank" class="subsection-item cat-bonding">
+          <div class="subsection-item cat-bonding has-popup" data-title="Ch 9 &amp; 10 Optional HW">
             <span class="subsection-num num-bonding">HW</span>
             <span class="subsection-title">Ch 9 &amp; 10 Optional HW</span>
+            <span class="subsection-count">4 links</span>
             <span class="subsection-arrow">↗</span>
-          </a>
+            <div class="popup-data">
+              <a href="https://drive.google.com/file/d/1fbSF6lTGMNLpP1g2CbUZ5KTCk6P070gA/view?usp=classroom_web&authuser=0">Ch9Answers.pdf</a>
+              <a href="https://drive.google.com/file/d/1KL33w2rlH-mUSZKb4V3QMEy7y__85Ehl/view?usp=classroom_web&authuser=0">Ch10_Answers.pdf</a>
+              <a href="https://drive.google.com/file/d/1gd4D_G87wk3GlribHjzMrNGv3sRVxoX6/view?usp=classroom_web&authuser=0">AssB_Answers.pdf</a>
+              <a href="https://docs.google.com/document/d/1czOQWi9TgGoYx9Q4lMjyxlOC6eBAOI7kuSK1fTF7mRk/edit?usp=classroom_web&authuser=0">HWCheck Ch 9 &amp; 10</a>
+            </div>
+          </div>
           <a href="https://drive.google.com/file/d/1B5ot8hHbzBLhIntzfYoheUYkNyhZj3Qm/view" target="_blank" class="subsection-item cat-bonding is-key">
             <span class="subsection-num num-key-bonding">Key</span>
             <span class="subsection-title">Ch 9–10 Answer Key</span>
@@ -532,7 +625,7 @@ layout: none
           <div class="unit-group-label">Unit 3 — IMFs &amp; Gases<span class="tested-badge">Heavily Tested</span></div>
 
           <div class="chapter-label">Ch 5 — Gas Chemistry</div>
-          <a href="INSERT_U3_SYLLABUS" target="_blank" class="subsection-item cat-imfs">
+          <a href="https://docs.google.com/document/d/1ebCiZH9jZntEVT8Jxs0vxbKxzWs69o0B52vkSt2BANo/edit?usp=classroom_web&authuser=0" target="_blank" class="subsection-item cat-imfs">
             <span class="subsection-num num-imfs">Syl</span>
             <span class="subsection-title">Ch 5 Gas Syllabus</span>
             <span class="subsection-arrow">↗</span>
@@ -542,22 +635,29 @@ layout: none
             <span class="subsection-title">Gas Chemistry — Supplement</span>
             <span class="subsection-arrow">↗</span>
           </a>
-          <a href="INSERT_GAS_LAB_LINK" target="_blank" class="subsection-item cat-imfs">
+          <div class="subsection-item cat-imfs has-popup" data-title="Gas Lab">
             <span class="subsection-num num-imfs">Lab</span>
             <span class="subsection-title">Gas Lab</span>
+            <span class="subsection-count">+ rubric</span>
             <span class="subsection-arrow">↗</span>
-          </a>
-          <a href="INSERT_CH5_RESOURCES" target="_blank" class="subsection-item cat-imfs">
-            <span class="subsection-num num-imfs">Res</span>
-            <span class="subsection-title">Gas Laws Resources</span>
-            <span class="subsection-arrow">↗</span>
-          </a>
-          <a href="INSERT_CH5_AP_VIDEOS" target="_blank" class="subsection-item cat-imfs">
+            <div class="popup-data">
+              <a href="https://docs.google.com/document/d/1pDghBA1Q4vWKhDj3Hu3hD2dhtBYBQ8VNOjyJu9n_snE/edit?usp=classroom_web&authuser=0">Lab Document</a>
+              <a href="https://docs.google.com/document/d/185J3zAnc-VB4Z4PvIwDhilAECzaasvT5VHY5ApdA_jA/edit?usp=classroom_web&authuser=0">Rubric</a>
+            </div>
+          </div>
+          <div class="subsection-item cat-imfs has-popup" data-title="Ch 5 AP Daily Videos">
             <span class="subsection-num num-imfs">Vid</span>
             <span class="subsection-title">Ch 5 AP Daily Videos</span>
+            <span class="subsection-count">4 links</span>
             <span class="subsection-arrow">↗</span>
-          </a>
-          <a href="INSERT_CH5_OPTIONAL_HW" target="_blank" class="subsection-item cat-imfs">
+            <div class="popup-data">
+              <a href="https://docs.google.com/document/d/1TJCQLjEZiKY-arFMF3O_H8ttJumqEx6HupHPS5cc02c/edit?usp=classroom_web&authuser=0">3.3 Solids, Liquids, Gases</a>
+              <a href="https://docs.google.com/document/d/1R_ofkwHZv0wdbhbyXw-3-QQSlzu3WsUVUEM6FsIxf_k/edit?usp=classroom_web&authuser=0">3.4 Ideal Gas Law</a>
+              <a href="https://docs.google.com/document/d/136JYgDnUqKuxOo8CdttO37FuTZRBLP4bhT2Ia2vUQfQ/edit?usp=classroom_web&authuser=0">3.5 Kinetic Molecular Theory</a>
+              <a href="https://docs.google.com/document/d/1h4YjYCHorsVfZ9BK5wSCvzBqDyI7aOa6pJ8uwUMSWeI/edit?usp=classroom_web&authuser=0">3.6 Deviation from Ideal Gas Law</a>
+            </div>
+          </div>
+          <a href="https://docs.google.com/document/d/1-n6OVBSZcj6jpm8rzLkac8HL4BT3XVlAnRJq96w2me8/edit?usp=classroom_web&authuser=0" target="_blank" class="subsection-item cat-imfs">
             <span class="subsection-num num-imfs">HW</span>
             <span class="subsection-title">Optional Ch 5 Book Problems</span>
             <span class="subsection-arrow">↗</span>
@@ -569,7 +669,7 @@ layout: none
           </a>
 
           <div class="chapter-label">Ch 11 — Interparticle Forces</div>
-          <a href="INSERT_CH11_SYLLABUS" target="_blank" class="subsection-item cat-imfs">
+          <a href="https://docs.google.com/document/d/1bnhGm5h8c1r1ZGUGglneSa_a0vNU0P6r6ydYMxItyhY/edit?usp=classroom_web&authuser=0" target="_blank" class="subsection-item cat-imfs">
             <span class="subsection-num num-imfs">Syl</span>
             <span class="subsection-title">Chapter 11 Syllabus</span>
             <span class="subsection-arrow">↗</span>
@@ -579,24 +679,24 @@ layout: none
             <span class="subsection-title">IMF &amp; Properties — Supplement</span>
             <span class="subsection-arrow">↗</span>
           </a>
-          <a href="INSERT_STICKY_QS_LINK" target="_blank" class="subsection-item cat-imfs">
+          <div class="subsection-item cat-imfs has-popup" data-title="Sticky Questions V2 Lab">
             <span class="subsection-num num-imfs">Lab</span>
             <span class="subsection-title">Sticky Questions V2 Lab</span>
+            <span class="subsection-count">+ rubric</span>
             <span class="subsection-arrow">↗</span>
-          </a>
-          <a href="INSERT_CH11_COPPER_LAB" target="_blank" class="subsection-item cat-imfs">
+            <div class="popup-data">
+              <a href="https://docs.google.com/document/d/1LevMhuqfgPe98knfRlWgf1CnwB-OjYIPurP_LDhRhLo/edit?usp=classroom_web&authuser=0">Lab Document</a>
+              <a href="https://docs.google.com/document/d/1gDDepDlZH6umLRIp3aEObxOaHNfNRGPwRb6QS109uz0/edit?usp=classroom_web&authuser=0">Rubric</a>
+            </div>
+          </div>
+          <a href="https://docs.google.com/document/d/1W6MWwdeOxRIhMxlxdq7gcJQkTbwueMaHXvfnaXEr858/edit?usp=classroom_web&authuser=0" target="_blank" class="subsection-item cat-imfs">
             <span class="subsection-num num-imfs">Lab</span>
             <span class="subsection-title">Cycle of Copper Reactions</span>
             <span class="subsection-arrow">↗</span>
           </a>
-          <a href="INSERT_CH11_UNDERSTANDING" target="_blank" class="subsection-item cat-imfs">
+          <a href="https://drive.google.com/file/d/1Y0MdRAuZMivBeDrewgxFbOqOffYzarPP/view?usp=classroom_web&authuser=0" target="_blank" class="subsection-item cat-imfs">
             <span class="subsection-num num-imfs">Res</span>
             <span class="subsection-title">Student Understanding of IMFs</span>
-            <span class="subsection-arrow">↗</span>
-          </a>
-          <a href="INSERT_CH11_RESOURCES" target="_blank" class="subsection-item cat-imfs">
-            <span class="subsection-num num-imfs">Res</span>
-            <span class="subsection-title">Ch 11 Resources</span>
             <span class="subsection-arrow">↗</span>
           </a>
           <a href="https://drive.google.com/file/d/1saO2qHs37XJ6sViNOVu7_XjQmVPMqt0G/view" target="_blank" class="subsection-item cat-imfs is-key">
@@ -610,7 +710,7 @@ layout: none
           <div class="unit-group-label">Unit 4 — Chemical Reactions</div>
 
           <div class="chapter-label">Ch 4 — Stoichiometry</div>
-          <a href="INSERT_U4_SYLLABUS" target="_blank" class="subsection-item cat-reactions">
+          <a href="https://docs.google.com/document/d/1wbtP9FClFx5roGtsEoWRcBQ0yxwaxyyru_xzGERKdA4/edit?usp=classroom_web&authuser=0" target="_blank" class="subsection-item cat-reactions">
             <span class="subsection-num num-reactions">Syl</span>
             <span class="subsection-title">Ch 4 Syllabus</span>
             <span class="subsection-arrow">↗</span>
@@ -620,21 +720,26 @@ layout: none
             <span class="subsection-title">Stoichiometry — Supplement (CED U4)</span>
             <span class="subsection-arrow">↗</span>
           </a>
-          <a href="INSERT_U4_LAB" target="_blank" class="subsection-item cat-reactions">
+          <div class="subsection-item cat-reactions has-popup" data-title="Redox Titration Lab">
             <span class="subsection-num num-reactions">Lab</span>
             <span class="subsection-title">Redox Titration Lab</span>
+            <span class="subsection-count">+ rubric</span>
             <span class="subsection-arrow">↗</span>
-          </a>
-          <a href="INSERT_CH4_RESOURCES" target="_blank" class="subsection-item cat-reactions">
-            <span class="subsection-num num-reactions">Res</span>
-            <span class="subsection-title">Ch 4 Resources</span>
-            <span class="subsection-arrow">↗</span>
-          </a>
-          <a href="INSERT_CH4_OPTIONAL_HW" target="_blank" class="subsection-item cat-reactions is-key">
+            <div class="popup-data">
+              <a href="https://docs.google.com/document/d/1B6Ylt0dMc2E37S3jL_UePYChbVSkzM-UjPjAK3iAsec/edit?usp=classroom_web&authuser=0">Lab Document</a>
+              <a href="https://docs.google.com/document/d/1KHLkCOVW94vZYkNtjvZCYqutM2v9AArVVqnH5l-EOhI/edit?usp=classroom_web&authuser=0">Rubric</a>
+            </div>
+          </div>
+          <div class="subsection-item cat-reactions is-key has-popup" data-title="Optional Book Work Problems &amp; Answers">
             <span class="subsection-num num-key-reactions">HW</span>
             <span class="subsection-title">Optional Book Work Problems &amp; Answers</span>
+            <span class="subsection-count">2 links</span>
             <span class="subsection-arrow">↗</span>
-          </a>
+            <div class="popup-data">
+              <a href="https://docs.google.com/document/d/1diFPrHw8BMup4Ij-ueum1TH4bx5buHVLe0huzNIxuAI/edit?usp=classroom_web&authuser=0">Optional Book Work Problems</a>
+              <a href="https://docs.google.com/document/d/114WZ1P8mgt3DKz40hojj9mmKW5CAaoRUAHtjb-9oXJw/edit?usp=classroom_web&authuser=0">Answers</a>
+            </div>
+          </div>
           <a href="https://drive.google.com/file/d/1Ny_M-lhotW1p3zaWUQxDizHRtptEZy9h/view" target="_blank" class="subsection-item cat-reactions is-key">
             <span class="subsection-num num-key-reactions">Key</span>
             <span class="subsection-title">Ch 4 Answer Key</span>
@@ -646,7 +751,7 @@ layout: none
           <div class="unit-group-label">Unit 5 — Kinetics</div>
 
           <div class="chapter-label">Ch 13 — Kinetics</div>
-          <a href="INSERT_U5_SYLLABUS" target="_blank" class="subsection-item cat-kinetics">
+          <a href="https://docs.google.com/document/d/1SI06r-DK6gbCYnrmQU5HuMXKch5F6Y9oKXAw9JFaucE/edit?usp=classroom_web&authuser=0" target="_blank" class="subsection-item cat-kinetics">
             <span class="subsection-num num-kinetics">Syl</span>
             <span class="subsection-title">Chapter 13 Syllabus</span>
             <span class="subsection-arrow">↗</span>
@@ -656,26 +761,26 @@ layout: none
             <span class="subsection-title">Kinetics — Lesson Supplement</span>
             <span class="subsection-arrow">↗</span>
           </a>
-          <a href="INSERT_U5_LAB" target="_blank" class="subsection-item cat-kinetics">
+          <a href="https://docs.google.com/document/d/1N6lFiwXf01-Hx1GdUcgogzSXRDlzWRQ0nkXe0ms2XIg/edit?usp=classroom_web&authuser=0" target="_blank" class="subsection-item cat-kinetics">
             <span class="subsection-num num-kinetics">Lab</span>
             <span class="subsection-title">Kinetics of MG Lab</span>
             <span class="subsection-arrow">↗</span>
           </a>
-          <a href="INSERT_CH13_PPT" target="_blank" class="subsection-item cat-kinetics">
-            <span class="subsection-num num-kinetics">PPT</span>
-            <span class="subsection-title">PowerPoint for Kinetics</span>
+          <a href="https://docs.google.com/document/d/1QqUBMOKANW2WXjXmR-w_xdi2FUbAvLKrj_wTG-VTJXs/edit?usp=classroom_web&authuser=0" target="_blank" class="subsection-item cat-kinetics">
+            <span class="subsection-num num-kinetics">Vid</span>
+            <span class="subsection-title">AP Daily Videos</span>
             <span class="subsection-arrow">↗</span>
           </a>
-          <a href="INSERT_CH13_RESOURCES" target="_blank" class="subsection-item cat-kinetics">
-            <span class="subsection-num num-kinetics">Res</span>
-            <span class="subsection-title">Resources for Kinetics</span>
-            <span class="subsection-arrow">↗</span>
-          </a>
-          <a href="INSERT_CH13_OPTIONAL_HW" target="_blank" class="subsection-item cat-kinetics">
+          <div class="subsection-item cat-kinetics has-popup" data-title="Optional Problems">
             <span class="subsection-num num-kinetics">HW</span>
             <span class="subsection-title">Optional Problems</span>
+            <span class="subsection-count">2 links</span>
             <span class="subsection-arrow">↗</span>
-          </a>
+            <div class="popup-data">
+              <a href="https://docs.google.com/document/d/1iZiWe-pAeinCpnZPZppsuTT0Z4Aq4vYoBsyASmzU0A4/edit?usp=classroom_web&authuser=0">Optional Problems</a>
+              <a href="https://docs.google.com/document/d/1z7TbqmollxCbYaEt-ku8sQtWlOdPSfCjXFrlPCdH9sE/edit?usp=classroom_web&authuser=0">Solution</a>
+            </div>
+          </div>
           <a href="https://drive.google.com/file/d/10PpG9PiFetfWlo0W-ApKXUlaZ7nhVYOl/view" target="_blank" class="subsection-item cat-kinetics is-key">
             <span class="subsection-num num-key-kinetics">Key</span>
             <span class="subsection-title">Ch 13 Answer Key</span>
@@ -687,7 +792,7 @@ layout: none
           <div class="unit-group-label">Unit 6 — Thermodynamics</div>
 
           <div class="chapter-label">Ch 6 — Thermochemistry</div>
-          <a href="INSERT_U6_SYLLABUS" target="_blank" class="subsection-item cat-thermo">
+          <a href="https://docs.google.com/document/d/1BubzNyCkR4yk-LTM_4RCwL0zOciknrMe-kHFIDwllPU/edit?usp=classroom_web&authuser=0" target="_blank" class="subsection-item cat-thermo">
             <span class="subsection-num num-thermo">Syl</span>
             <span class="subsection-title">Ch 6 Syllabus</span>
             <span class="subsection-arrow">↗</span>
@@ -697,31 +802,31 @@ layout: none
             <span class="subsection-title">Thermochemistry — Supplement</span>
             <span class="subsection-arrow">↗</span>
           </a>
-          <a href="INSERT_U6_LAB" target="_blank" class="subsection-item cat-thermo">
+          <a href="https://docs.google.com/document/d/16cewH88RX4ZFUosN9uj8qOPJDvHyo7e9ldGbjE6AiBY/edit?usp=classroom_web&authuser=0" target="_blank" class="subsection-item cat-thermo">
             <span class="subsection-num num-thermo">Lab</span>
             <span class="subsection-title">Thermochemistry Lab</span>
             <span class="subsection-arrow">↗</span>
           </a>
-          <a href="INSERT_CH6_PPT" target="_blank" class="subsection-item cat-thermo">
+          <a href="https://docs.google.com/presentation/d/1sKeQCa7hHYq4_ZDDkQjh7qrw-fx6eaYI2NGDZTBna2g/edit?usp=classroom_web&authuser=0" target="_blank" class="subsection-item cat-thermo">
             <span class="subsection-num num-thermo">PPT</span>
             <span class="subsection-title">Thermochemistry PPT</span>
             <span class="subsection-arrow">↗</span>
           </a>
-          <a href="INSERT_CH6_RESOURCES" target="_blank" class="subsection-item cat-thermo">
-            <span class="subsection-num num-thermo">Res</span>
-            <span class="subsection-title">Resources to Support Thermochemistry</span>
-            <span class="subsection-arrow">↗</span>
-          </a>
-          <a href="INSERT_CH6_NOTEBOOKLM" target="_blank" class="subsection-item cat-thermo">
+          <a href="https://notebooklm.google.com/notebook/f228724e-2382-4ade-a9b2-dace9048e9b6?utm_source=classroom&utm_medium=referral&authuser=0" target="_blank" class="subsection-item cat-thermo">
             <span class="subsection-num num-thermo">Res</span>
             <span class="subsection-title">Notebook LM Resources</span>
             <span class="subsection-arrow">↗</span>
           </a>
-          <a href="INSERT_CH6_OPTIONAL_HW" target="_blank" class="subsection-item cat-thermo is-key">
+          <div class="subsection-item cat-thermo is-key has-popup" data-title="Optional Book Problems &amp; Key">
             <span class="subsection-num num-key-thermo">HW</span>
             <span class="subsection-title">Optional Book Problems &amp; Key</span>
+            <span class="subsection-count">2 links</span>
             <span class="subsection-arrow">↗</span>
-          </a>
+            <div class="popup-data">
+              <a href="https://docs.google.com/document/d/1TIQYYxiRCn97yVFJHFtJeUug4i1tqCq-2VfrH1KAVGA/edit?usp=classroom_web&authuser=0">Optional Book Problems</a>
+              <a href="https://drive.google.com/file/d/1Pgm50xQ1o-AFxWFrPe_epa3Ny_cGtLiy/view?usp=classroom_web&authuser=0">Answer Key</a>
+            </div>
+          </div>
           <a href="https://drive.google.com/file/d/1OOocbDRZwTLs8_5AcrlmMNdvYj0a4mKb/view" target="_blank" class="subsection-item cat-thermo is-key">
             <span class="subsection-num num-key-thermo">Key</span>
             <span class="subsection-title">Ch 6 Answer Key</span>
@@ -733,7 +838,7 @@ layout: none
           <div class="unit-group-label">Unit 7 — Equilibrium</div>
 
           <div class="chapter-label">Ch 14 — Equilibrium</div>
-          <a href="INSERT_U7_SYLLABUS" target="_blank" class="subsection-item cat-equilibrium">
+          <a href="https://docs.google.com/document/d/1ObtWf_vE0_5jij_O4Tan_2YLbUMfMR6UA9HznDOZWxQ/edit?usp=classroom_web&authuser=0" target="_blank" class="subsection-item cat-equilibrium">
             <span class="subsection-num num-equilibrium">Syl</span>
             <span class="subsection-title">Ch 14 Syllabus</span>
             <span class="subsection-arrow">↗</span>
@@ -743,26 +848,32 @@ layout: none
             <span class="subsection-title">Equilibrium — Lesson Supplement</span>
             <span class="subsection-arrow">↗</span>
           </a>
-          <a href="INSERT_U7_LAB" target="_blank" class="subsection-item cat-equilibrium">
+          <div class="subsection-item cat-equilibrium has-popup" data-title="Le Chat Lab">
             <span class="subsection-num num-equilibrium">Lab</span>
             <span class="subsection-title">Le Chat Lab</span>
+            <span class="subsection-count">+ rubric</span>
             <span class="subsection-arrow">↗</span>
-          </a>
-          <a href="INSERT_CH14_PPT" target="_blank" class="subsection-item cat-equilibrium">
+            <div class="popup-data">
+              <a href="https://docs.google.com/document/d/1xFBsUM3zIAU9SztI9A7NR1UgGqtBCI32wr1-nDmt-Lo/edit?usp=classroom_web&authuser=0">Lab Document</a>
+              <a href="https://docs.google.com/document/d/1HijOTxjj7EGykSgz9DFTtQoqF7VGHLWYzDur8-bS3yA/edit?usp=classroom_web&authuser=0">Rubric</a>
+            </div>
+          </div>
+          <a href="https://docs.google.com/presentation/d/1e0kzYNakkHXXSiMNnJ6Xs4plmwT7gaxzCcJf_S0FiOQ/edit?usp=classroom_web&authuser=0" target="_blank" class="subsection-item cat-equilibrium">
             <span class="subsection-num num-equilibrium">PPT</span>
             <span class="subsection-title">PowerPoint — Equilibrium</span>
             <span class="subsection-arrow">↗</span>
           </a>
-          <a href="INSERT_CH14_RESOURCES" target="_blank" class="subsection-item cat-equilibrium">
-            <span class="subsection-num num-equilibrium">Res</span>
-            <span class="subsection-title">Ch 14 Resources</span>
-            <span class="subsection-arrow">↗</span>
-          </a>
-          <a href="INSERT_CH14_OPTIONAL_HW" target="_blank" class="subsection-item cat-equilibrium">
+          <div class="subsection-item cat-equilibrium has-popup" data-title="Optional Book Work — Chapter 14">
             <span class="subsection-num num-equilibrium">HW</span>
             <span class="subsection-title">Optional Book Work — Chapter 14</span>
+            <span class="subsection-count">3 links</span>
             <span class="subsection-arrow">↗</span>
-          </a>
+            <div class="popup-data">
+              <a href="https://docs.google.com/document/d/1IP2ruiuW8cYlESU1dhMJGAUHogjFJF3WWgwffxxnGGE/edit?usp=classroom_web&authuser=0">APCh14HWCheck</a>
+              <a href="https://drive.google.com/file/d/1UB_3MS0ekvBX2pKf7nXM50EA5Lm8mi5M/view?usp=classroom_web&authuser=0">HWSolution 80s90s.pdf</a>
+              <a href="https://drive.google.com/file/d/1huzPl7jDgs6ugko1SNebWbCjlHtCqYvk/view?usp=classroom_web&authuser=0">CH14HWSolnTro.pdf</a>
+            </div>
+          </div>
           <a href="https://drive.google.com/file/d/1R3zbtGB_AwwzmvMYdbu2L2cPMQrfc_Ci/view" target="_blank" class="subsection-item cat-equilibrium is-key">
             <span class="subsection-num num-key-equilibrium">Key</span>
             <span class="subsection-title">Ch 14 Answer Key</span>
@@ -774,7 +885,7 @@ layout: none
           <div class="unit-group-label">Unit 8 — Acids &amp; Bases<span class="tested-badge">Heavily Tested</span></div>
 
           <div class="chapter-label">Ch 15 &amp; 16 — Ka, Kb &amp; Ksp</div>
-          <a href="INSERT_U8_SYLLABUS" target="_blank" class="subsection-item cat-acids">
+          <a href="https://docs.google.com/document/d/15HL0yKjNJ7a-Y9gxuO1w16EocS0giPk-yuPv5uj1wHA/edit?usp=classroom_web&authuser=0" target="_blank" class="subsection-item cat-acids">
             <span class="subsection-num num-acids">Syl</span>
             <span class="subsection-title">Unit Syllabus</span>
             <span class="subsection-arrow">↗</span>
@@ -784,41 +895,47 @@ layout: none
             <span class="subsection-title">Acids &amp; Bases — Supplement</span>
             <span class="subsection-arrow">↗</span>
           </a>
-          <a href="INSERT_TITRATION_LAB_LINK" target="_blank" class="subsection-item cat-acids">
+          <div class="subsection-item cat-acids has-popup" data-title="Titration Lab">
             <span class="subsection-num num-acids">Lab</span>
             <span class="subsection-title">Titration Lab</span>
+            <span class="subsection-count">+ rubric</span>
             <span class="subsection-arrow">↗</span>
-          </a>
-          <a href="INSERT_BUFFER_LAB_LINK" target="_blank" class="subsection-item cat-acids">
+            <div class="popup-data">
+              <a href="https://docs.google.com/document/d/1lk3jVGKaRaO-EOISJAjP_Um0CaLIt-Llw4QGVAqkPIg/edit?usp=classroom_web&authuser=0">Lab Document</a>
+              <a href="https://docs.google.com/document/d/1hSj9P1rrTPKynA-VSkifY7fl2i395T0zmmTbL74klbU/edit?usp=classroom_web&authuser=0">Rubric</a>
+            </div>
+          </div>
+          <a href="https://docs.google.com/document/d/1CrPWGFPgsRee0iln2SzYMyBSOrMZdw2DqMy83A92QGw/edit?usp=classroom_web&authuser=0" target="_blank" class="subsection-item cat-acids">
             <span class="subsection-num num-acids">Lab</span>
             <span class="subsection-title">Household Buffer Lab</span>
             <span class="subsection-arrow">↗</span>
           </a>
-          <a href="INSERT_KSP_LAB_LINK" target="_blank" class="subsection-item cat-acids">
+          <a href="https://docs.google.com/document/d/1DcBYlbkWLGYFdVBcup013sgJKXCgrNapUtrbB3z98Vc/edit?usp=classroom_web&authuser=0" target="_blank" class="subsection-item cat-acids">
             <span class="subsection-num num-acids">Lab</span>
             <span class="subsection-title">Ksp meets Titration — Ksp of Ca(OH)₂</span>
             <span class="subsection-arrow">↗</span>
           </a>
-          <a href="INSERT_CH1516_STUDY_TOOLS" target="_blank" class="subsection-item cat-acids">
-            <span class="subsection-num num-acids">Res</span>
-            <span class="subsection-title">Study Tools — Unit 7 &amp; 8</span>
-            <span class="subsection-arrow">↗</span>
-          </a>
-          <a href="INSERT_CH1516_RESOURCES" target="_blank" class="subsection-item cat-acids">
-            <span class="subsection-num num-acids">Res</span>
-            <span class="subsection-title">Resources for the Unit</span>
-            <span class="subsection-arrow">↗</span>
-          </a>
-          <a href="INSERT_CH1516_BUFFER_TUTORIAL" target="_blank" class="subsection-item cat-acids">
+          <div class="subsection-item cat-acids has-popup" data-title="How Buffers Work — Tutorial">
             <span class="subsection-num num-acids">Tut</span>
             <span class="subsection-title">How Buffers Work — Tutorial</span>
+            <span class="subsection-count">2 links</span>
             <span class="subsection-arrow">↗</span>
-          </a>
-          <a href="INSERT_CH1516_OPTIONAL_HW" target="_blank" class="subsection-item cat-acids is-key">
+            <div class="popup-data">
+              <a href="https://drive.google.com/file/d/1iPsUK1L95AYFVB1UJga27mXjrH3oPwug/view?usp=classroom_web&authuser=0">How Buffers Work.webm</a>
+              <a href="https://drive.google.com/file/d/1YIT5RLocYjvP4WvVb86zU5LylUro2wlD/view?usp=classroom_web&authuser=0">Ch 15 &amp; 16 LessSup Q 25.webm</a>
+            </div>
+          </div>
+          <div class="subsection-item cat-acids is-key has-popup" data-title="Optional Unit HW Bookwork &amp; Key">
             <span class="subsection-num num-key-acids">HW</span>
             <span class="subsection-title">Optional Unit HW Bookwork &amp; Key</span>
+            <span class="subsection-count">3 links</span>
             <span class="subsection-arrow">↗</span>
-          </a>
+            <div class="popup-data">
+              <a href="https://drive.google.com/file/d/1z-OxVb37JjcO2Oep5ST5pS7b8P3F63of/view?usp=classroom_web&authuser=0">CH15_HWSoln_Tro.pdf</a>
+              <a href="https://drive.google.com/file/d/1eAxlFovaPG1ALiR_tE4OWtkbIFiLVCyx/view?usp=classroom_web&authuser=0">CH16_HWSoln_Tro.pdf</a>
+              <a href="https://docs.google.com/document/d/1X5LfhKQX_OMqF1XalQ45wsRlJkkIB3LIerb6NTxPG94/edit?usp=classroom_web&authuser=0">APU11HWCheck</a>
+            </div>
+          </div>
           <a href="https://drive.google.com/file/d/14hyh7LK3DQv5l_mMu4NHidnBsef0zL46/view" target="_blank" class="subsection-item cat-acids is-key">
             <span class="subsection-num num-key-acids">Key</span>
             <span class="subsection-title">Ch 15–16 Answer Key</span>
@@ -830,7 +947,7 @@ layout: none
           <div class="unit-group-label">Unit 9 — Applications of Thermo</div>
 
           <div class="chapter-label">Ch 17 — Spontaneity &amp; Free Energy</div>
-          <a href="INSERT_U9_SYLLABUS" target="_blank" class="subsection-item cat-entropy">
+          <a href="https://docs.google.com/document/d/1egXvA2IcIMzZyip45Hd3YnbbGCeCrMvHU8YtyghglDE/edit?usp=classroom_web&authuser=0" target="_blank" class="subsection-item cat-entropy">
             <span class="subsection-num num-entropy">Syl</span>
             <span class="subsection-title">Ch 17 Syllabus</span>
             <span class="subsection-arrow">↗</span>
@@ -847,7 +964,7 @@ layout: none
           </a>
 
           <div class="chapter-label">Ch 18 — Electrochemistry</div>
-          <a href="INSERT_CH18_SYLLABUS" target="_blank" class="subsection-item cat-entropy">
+          <a href="https://docs.google.com/document/d/1gYfdX9kKhNUg4n_fJKQzBlyz10VPnK02TbHJi-pszWo/edit?usp=classroom_web&authuser=0" target="_blank" class="subsection-item cat-entropy">
             <span class="subsection-num num-entropy">Syl</span>
             <span class="subsection-title">Chapter 18 Syllabus</span>
             <span class="subsection-arrow">↗</span>
@@ -857,32 +974,27 @@ layout: none
             <span class="subsection-title">Electrochemistry — Supplement</span>
             <span class="subsection-arrow">↗</span>
           </a>
-          <a href="INSERT_MAX_PD_LAB_LINK" target="_blank" class="subsection-item cat-entropy">
+          <a href="https://docs.google.com/document/d/1kdd5z4rnFoxcYQJLBQPH4NV27cvTyZywMwjQTDjYtPY/edit?usp=classroom_web&authuser=0" target="_blank" class="subsection-item cat-entropy">
             <span class="subsection-num num-entropy">Lab</span>
             <span class="subsection-title">MAX PD Lab</span>
             <span class="subsection-arrow">↗</span>
           </a>
-          <a href="INSERT_FREE_ENERGY_LAB_LINK" target="_blank" class="subsection-item cat-entropy">
+          <div class="subsection-item cat-entropy has-popup" data-title="Free Energy Lab">
             <span class="subsection-num num-entropy">Lab</span>
             <span class="subsection-title">Free Energy Lab</span>
+            <span class="subsection-count">+ rubric</span>
             <span class="subsection-arrow">↗</span>
-          </a>
-          <a href="INSERT_CH18_FRQ" target="_blank" class="subsection-item cat-entropy">
+            <div class="popup-data">
+              <a href="https://docs.google.com/document/d/1HP1ncm77Zq6CAliJ4nxrF0IdduEPBCpyy6wkO1f9o5o/edit?usp=classroom_web&authuser=0">Lab Document</a>
+              <a href="https://docs.google.com/document/d/1n-bzgMSLTmOh6UBx11Zkc1tVofiwItXimqIyTq_R2hk/edit?usp=classroom_web&authuser=0">Rubric</a>
+            </div>
+          </div>
+          <a href="https://drive.google.com/file/d/1IaulAjVAx9J7R-7GFXp36pGPwbd86hFF/view?usp=classroom_web&authuser=0" target="_blank" class="subsection-item cat-entropy">
             <span class="subsection-num num-entropy">FRQ</span>
             <span class="subsection-title">Past Free Response Questions</span>
             <span class="subsection-arrow">↗</span>
           </a>
-          <a href="INSERT_CH18_HELP" target="_blank" class="subsection-item cat-entropy">
-            <span class="subsection-num num-entropy">Res</span>
-            <span class="subsection-title">Electrochem Help!</span>
-            <span class="subsection-arrow">↗</span>
-          </a>
-          <a href="INSERT_CH18_RESOURCES" target="_blank" class="subsection-item cat-entropy">
-            <span class="subsection-num num-entropy">Res</span>
-            <span class="subsection-title">Electrochem Resources</span>
-            <span class="subsection-arrow">↗</span>
-          </a>
-          <a href="INSERT_CH18_SOLUTIONS" target="_blank" class="subsection-item cat-entropy is-key">
+          <a href="https://drive.google.com/file/d/12t-5_wEhXAm9V8dkThnjawD2XqFJPQ4a/view?usp=classroom_web&authuser=0" target="_blank" class="subsection-item cat-entropy is-key">
             <span class="subsection-num num-key-entropy">Key</span>
             <span class="subsection-title">Solutions for Book Problems</span>
             <span class="subsection-arrow">↗</span>
@@ -905,13 +1017,51 @@ layout: none
         Test your knowledge with challenging questions mimicking real AP Chem exams.
       </p>
       <div class="quiz-placeholder">
-        <em>[Your Google Forms embed link goes here]</em>
+        <em>INSERT_Practice_Quiz_Google_Form_Embed_Link</em>
       </div>
     </section>
 
   </main>
 
+  <div class="modal-overlay" id="linkModal">
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-head">
+        <h3 id="modalTitle"></h3>
+        <button class="modal-close" id="modalClose" aria-label="Close">✕</button>
+      </div>
+      <div class="modal-body" id="modalBody"></div>
+    </div>
+  </div>
+
   <script>
+    /* ── Popup modal for grouped multi-link items ── */
+    const modal = document.getElementById('linkModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalBody = document.getElementById('modalBody');
+
+    document.querySelectorAll('.subsection-item.has-popup').forEach(item => {
+      item.addEventListener('click', e => {
+        e.preventDefault();
+        modalTitle.textContent = item.dataset.title || 'Resources';
+        modalBody.innerHTML = '';
+        item.querySelectorAll('.popup-data a').forEach(a => {
+          const link = document.createElement('a');
+          link.href = a.getAttribute('href');
+          link.target = '_blank';
+          link.rel = 'noopener';
+          link.className = 'modal-link';
+          link.innerHTML = '<span>' + a.textContent + '</span><span class="ml-arrow">↗</span>';
+          modalBody.appendChild(link);
+        });
+        modal.classList.add('open');
+      });
+    });
+
+    function closeModal() { modal.classList.remove('open'); }
+    document.getElementById('modalClose').addEventListener('click', closeModal);
+    modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
     /* Scroll spy updated to track the new sections and grid blocks */
     const targets = document.querySelectorAll('section[id], .unit-group-box[id]');
     const navLinks = document.querySelectorAll('.sidebar-nav a');

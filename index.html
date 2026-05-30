@@ -70,7 +70,7 @@
     .hero::before {
       content: "";
       position: absolute;
-      top: 50%; right: -140px;
+      top: 50%; right: -37px;
       width: 560px; height: 560px;
       margin-top: -280px;
       background: radial-gradient(circle at center,
@@ -117,36 +117,34 @@
       to   { opacity: 1; transform: none; }
     }
 
-    /* ── Animated water (H₂O) molecule ────────── */
-    .hero-molecule {
+    /* ── Animated hydrogen-bonded water network ── */
+    .hero-network {
       position: absolute;
-      top: 50%; right: 3.25rem;
-      transform: translateY(-50%);
-      width: 176px; height: 176px;
-      animation: mol-float 7s ease-in-out infinite;
+      top: 50%; right: 1.5rem;
+      width: 440px; height: 188px;
+      margin-top: -94px;
+      animation: net-float 7s ease-in-out infinite;
       pointer-events: none;
       z-index: 0;
     }
-    @keyframes mol-float {
-      0%, 100% { transform: translateY(-50%); }
-      50%      { transform: translateY(calc(-50% - 12px)); }
+    @keyframes net-float {
+      0%, 100% { transform: translateY(0); }
+      50%      { transform: translateY(-10px); }
     }
-    .hero-molecule .bond {
+    .hero-network .bond {
       stroke: #c4d2df;
-      stroke-width: 6;
+      stroke-width: 5;
       stroke-linecap: round;
     }
-    .hero-molecule .ring {
-      fill: none;
-      stroke: #e3ebf2;
-      stroke-width: 1.5;
-      stroke-dasharray: 3 8;
-      transform-box: view-box;
-      transform-origin: 90px 90px;
-      animation: ring-spin 40s linear infinite;
+    .hero-network .hbond {
+      stroke: #93a8bd;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-dasharray: 2 6;
+      animation: hbond-flow 2.6s linear infinite;
     }
-    @keyframes ring-spin { to { transform: rotate(360deg); } }
-    .hero-molecule .atom-o {
+    @keyframes hbond-flow { to { stroke-dashoffset: -16; } }
+    .hero-network .atom-o {
       fill: #dc2626;
       transform-box: fill-box;
       transform-origin: center;
@@ -156,16 +154,29 @@
       0%, 100% { transform: scale(1); }
       50%      { transform: scale(1.05); }
     }
-    .hero-molecule .atom-h { fill: #f1f5f9; stroke: #cbd5e1; stroke-width: 1.5; }
-    .hero-molecule .mol-label {
+    .hero-network .atom-h { fill: #f1f5f9; stroke: #cbd5e1; stroke-width: 1.4; }
+    .hero-network .lbl {
       font-family: 'Plus Jakarta Sans', sans-serif;
       font-weight: 700;
       text-anchor: middle;
       dominant-baseline: central;
     }
-    .hero-molecule .o-label { fill: #ffffff; font-size: 19px; }
-    .hero-molecule .h-label { fill: #64748b; font-size: 11px; }
-    @media (max-width: 720px) { .hero-molecule { display: none; } }
+    .hero-network .o-label { fill: #ffffff; font-size: 14px; }
+    .hero-network .h-label { fill: #64748b; font-size: 8.5px; }
+    .hero-network .charge { font-size: 11px; font-weight: 700; }
+    .hero-network .neg { fill: #b91c1c; }
+    .hero-network .pos { fill: #1d4ed8; }
+    .hero-network .mol { animation: drift-b 6.5s ease-in-out infinite; }
+    .hero-network .m1  { animation: drift-a 5.4s ease-in-out infinite; }
+    .hero-network .m2  { animation: drift-c 7.3s ease-in-out infinite; }
+    .hero-network .m3  { animation: drift-d 6.1s ease-in-out infinite 0.4s; }
+    .hero-network .m4  { animation: drift-e 8.0s ease-in-out infinite 0.9s; }
+    @keyframes drift-a { 0%,100% { transform: translate(0,0); }    50% { transform: translate(-4px,-3px); } }
+    @keyframes drift-b { 0%,100% { transform: translate(0,0); }    50% { transform: translate(3px,-4px); } }
+    @keyframes drift-c { 0%,100% { transform: translate(0,0); }    50% { transform: translate(-3px,4px); } }
+    @keyframes drift-d { 0%,100% { transform: translate(0,0); }    50% { transform: translate(4px,2px); } }
+    @keyframes drift-e { 0%,100% { transform: translate(0,0); }    50% { transform: translate(-2px,4px); } }
+    @media (max-width: 980px) { .hero-network { display: none; } }
 
     .unit-section {
       padding: 2.75rem 3rem 3rem;
@@ -540,16 +551,91 @@
   <main>
 
     <section id="hero" class="hero">
-      <svg class="hero-molecule" viewBox="0 0 180 180" aria-hidden="true" role="img" aria-label="Water molecule">
-        <circle class="ring" cx="90" cy="90" r="70"></circle>
-        <line class="bond" x1="90" y1="78" x2="49" y2="110"></line>
-        <line class="bond" x1="90" y1="78" x2="131" y2="110"></line>
-        <circle class="atom-h" cx="49" cy="110" r="14"></circle>
-        <circle class="atom-h" cx="131" cy="110" r="14"></circle>
-        <circle class="atom-o" cx="90" cy="78" r="23"></circle>
-        <text class="mol-label o-label" x="90" y="78">O</text>
-        <text class="mol-label h-label" x="49" y="110">H</text>
-        <text class="mol-label h-label" x="131" y="110">H</text>
+      <svg class="hero-network" viewBox="0 0 480 205" aria-hidden="true" role="img" aria-label="Hydrogen-bonded water molecules">
+        <line class="hbond" x1="79"  y1="100" x2="170" y2="55"></line>
+        <line class="hbond" x1="190" y1="137" x2="170" y2="55"></line>
+        <line class="hbond" x1="196" y1="66"  x2="340" y2="80"></line>
+        <line class="hbond" x1="358" y1="102" x2="415" y2="150"></line>
+
+        <g transform="translate(65,75) rotate(22)">
+          <g class="mol m1">
+            <line class="bond" x1="0" y1="0" x2="-22" y2="18"></line>
+            <line class="bond" x1="0" y1="0" x2="22" y2="18"></line>
+            <circle class="atom-h" cx="-22" cy="18" r="10"></circle>
+            <circle class="atom-h" cx="22" cy="18" r="10"></circle>
+            <circle class="atom-o" cx="0" cy="0" r="16"></circle>
+            <text class="lbl o-label" x="0" y="0">O</text>
+            <text class="lbl h-label" x="-22" y="18">H</text>
+            <text class="lbl h-label" x="22" y="18">H</text>
+            <text class="lbl charge neg" x="0" y="-23">−</text>
+            <text class="lbl charge pos" x="-31" y="30">+</text>
+            <text class="lbl charge pos" x="31" y="30">+</text>
+          </g>
+        </g>
+
+        <g transform="translate(170,55) rotate(-16)">
+          <g class="mol">
+            <line class="bond" x1="0" y1="0" x2="-22" y2="18"></line>
+            <line class="bond" x1="0" y1="0" x2="22" y2="18"></line>
+            <circle class="atom-h" cx="-22" cy="18" r="10"></circle>
+            <circle class="atom-h" cx="22" cy="18" r="10"></circle>
+            <circle class="atom-o" cx="0" cy="0" r="16"></circle>
+            <text class="lbl o-label" x="0" y="0">O</text>
+            <text class="lbl h-label" x="-22" y="18">H</text>
+            <text class="lbl h-label" x="22" y="18">H</text>
+            <text class="lbl charge neg" x="0" y="-23">−</text>
+            <text class="lbl charge pos" x="-31" y="30">+</text>
+            <text class="lbl charge pos" x="31" y="30">+</text>
+          </g>
+        </g>
+
+        <g transform="translate(215,150) rotate(168)">
+          <g class="mol m2">
+            <line class="bond" x1="0" y1="0" x2="-22" y2="18"></line>
+            <line class="bond" x1="0" y1="0" x2="22" y2="18"></line>
+            <circle class="atom-h" cx="-22" cy="18" r="10"></circle>
+            <circle class="atom-h" cx="22" cy="18" r="10"></circle>
+            <circle class="atom-o" cx="0" cy="0" r="16"></circle>
+            <text class="lbl o-label" x="0" y="0">O</text>
+            <text class="lbl h-label" x="-22" y="18">H</text>
+            <text class="lbl h-label" x="22" y="18">H</text>
+            <text class="lbl charge neg" x="0" y="-23">−</text>
+            <text class="lbl charge pos" x="-31" y="30">+</text>
+            <text class="lbl charge pos" x="31" y="30">+</text>
+          </g>
+        </g>
+
+        <g transform="translate(340,80) rotate(12)">
+          <g class="mol m3">
+            <line class="bond" x1="0" y1="0" x2="-22" y2="18"></line>
+            <line class="bond" x1="0" y1="0" x2="22" y2="18"></line>
+            <circle class="atom-h" cx="-22" cy="18" r="10"></circle>
+            <circle class="atom-h" cx="22" cy="18" r="10"></circle>
+            <circle class="atom-o" cx="0" cy="0" r="16"></circle>
+            <text class="lbl o-label" x="0" y="0">O</text>
+            <text class="lbl h-label" x="-22" y="18">H</text>
+            <text class="lbl h-label" x="22" y="18">H</text>
+            <text class="lbl charge neg" x="0" y="-23">−</text>
+            <text class="lbl charge pos" x="-31" y="30">+</text>
+            <text class="lbl charge pos" x="31" y="30">+</text>
+          </g>
+        </g>
+
+        <g transform="translate(415,150) rotate(-22)">
+          <g class="mol m4">
+            <line class="bond" x1="0" y1="0" x2="-22" y2="18"></line>
+            <line class="bond" x1="0" y1="0" x2="22" y2="18"></line>
+            <circle class="atom-h" cx="-22" cy="18" r="10"></circle>
+            <circle class="atom-h" cx="22" cy="18" r="10"></circle>
+            <circle class="atom-o" cx="0" cy="0" r="16"></circle>
+            <text class="lbl o-label" x="0" y="0">O</text>
+            <text class="lbl h-label" x="-22" y="18">H</text>
+            <text class="lbl h-label" x="22" y="18">H</text>
+            <text class="lbl charge neg" x="0" y="-23">−</text>
+            <text class="lbl charge pos" x="-31" y="30">+</text>
+            <text class="lbl charge pos" x="31" y="30">+</text>
+          </g>
+        </g>
       </svg>
       <h1>AP <span class="accent">Chemistry</span> Exam Review Resource</h1>
       <p>2026 Project made by Max H.</p>

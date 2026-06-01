@@ -488,6 +488,17 @@
     }
     .modal-link:hover { background: #f7f8fa; border-color: var(--border-strong); }
     .modal-link .ml-arrow { margin-left: auto; color: var(--text-faint); flex-shrink: 0; }
+    .modal-note {
+      margin: 0;
+      padding: 0.6rem 0.7rem;
+      border: 1px dashed var(--border-strong);
+      border-radius: 8px;
+      background: #f7f8fa;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      font-style: italic;
+      line-height: 1.4;
+    }
 
     /* ═══════════════════════════════════════════
        CONTACT FOOTER
@@ -560,7 +571,7 @@
         <g transform="translate(65,75) rotate(22)">
           <g class="mol m1">
             <line class="bond" x1="0" y1="0" x2="-22" y2="18"></line>
-            <line class="bond" x1="0" y1="0" x2="22" y2="18"></line>
+            <line class="bond" x1="0" y1="0" ins="22" y2="18"></line>
             <circle class="atom-h" cx="-22" cy="18" r="10"></circle>
             <circle class="atom-h" cx="22" cy="18" r="10"></circle>
             <circle class="atom-o" cx="0" cy="0" r="16"></circle>
@@ -720,11 +731,16 @@
               <a href="https://drive.google.com/file/d/17ylqzdq_kOtiiCFYuhyrNV7vFfL_hjMA/view?usp=classroom_web&authuser=0">Answer Key</a>
             </div>
           </div>
-          <a href="https://drive.google.com/file/d/1lw9S0Vt7mRZPiH1NnfxeGtT_4IqaLvb9/view?usp=classroom_web&authuser=0" target="_blank" class="subsection-item cat-structure">
+          <div class="subsection-item cat-structure has-popup" data-title="Optional Book Problems — Ch 7 &amp; 8">
             <span class="subsection-num num-structure">HW</span>
             <span class="subsection-title">Optional Book Problems — Ch 7 &amp; 8</span>
+            <span class="subsection-count">2 links</span>
             <span class="subsection-arrow">↗</span>
-          </a>
+            <div class="popup-data">
+              <a href="https://drive.google.com/file/d/1lw9S0Vt7mRZPiH1NnfxeGtT_4IqaLvb9/view?usp=classroom_web&authuser=0">Optional Book Problems — Ch 7 &amp; 8</a>
+              <a href="https://drive.google.com/file/d/1P085ByX2DYkS6dNnTGhBuLtXGX--22lP/view?usp=classroom_web&authuser=0">Answers</a>
+            </div>
+          </div>
           <a href="https://drive.google.com/file/d/14JgFMMKlJqTWOvrezvB2xCioVqUtIwyF/view" target="_blank" class="subsection-item cat-structure is-key">
             <span class="subsection-num num-key-structure">Key</span>
             <span class="subsection-title">Ch 7–8 Answer Key</span>
@@ -801,11 +817,16 @@
               <a href="https://docs.google.com/document/d/1h4YjYCHorsVfZ9BK5wSCvzBqDyI7aOa6pJ8uwUMSWeI/edit?usp=classroom_web&authuser=0">3.6 Deviation from Ideal Gas Law</a>
             </div>
           </div>
-          <a href="https://docs.google.com/document/d/1-n6OVBSZcj6jpm8rzLkac8HL4BT3XVlAnRJq96w2me8/edit?usp=classroom_web&authuser=0" target="_blank" class="subsection-item cat-imfs">
+          <div class="subsection-item cat-imfs has-popup" data-title="Optional Ch 5 Book Problems">
             <span class="subsection-num num-imfs">HW</span>
             <span class="subsection-title">Optional Ch 5 Book Problems</span>
+            <span class="subsection-count">2 links</span>
             <span class="subsection-arrow">↗</span>
-          </a>
+            <div class="popup-data">
+              <a href="https://docs.google.com/document/d/1-n6OVBSZcj6jpm8rzLkac8HL4BT3XVlAnRJq96w2me8/edit?usp=classroom_web&authuser=0">Optional Ch 5 Book Problems</a>
+              <a href="https://docs.google.com/document/d/1wV21Dd1yP86SqkOAmQB3uToe3rF6s38rOm_OMg8kbuU/edit?usp=classroom_web&authuser=0">Answers</a>
+            </div>
+          </div>
           <a href="https://docs.google.com/document/d/1kKCLrvh_83NhMieI3uoSbxgTYUuccUod2ZNy0ou4njw/edit?tab=t.0" target="_blank" class="subsection-item cat-imfs is-key">
             <span class="subsection-num num-key-imfs">Key</span>
             <span class="subsection-title">Ch 5 Answer Key</span>
@@ -874,8 +895,8 @@
               <a href="https://docs.google.com/document/d/1KHLkCOVW94vZYkNtjvZCYqutM2v9AArVVqnH5l-EOhI/edit?usp=classroom_web&authuser=0">Rubric</a>
             </div>
           </div>
-          <div class="subsection-item cat-reactions is-key has-popup" data-title="Optional Book Work Problems &amp; Answers">
-            <span class="subsection-num num-key-reactions">HW</span>
+          <div class="subsection-item cat-reactions has-popup" data-title="Optional Book Work Problems &amp; Answers">
+            <span class="subsection-num num-reactions">HW</span>
             <span class="subsection-title">Optional Book Work Problems &amp; Answers</span>
             <span class="subsection-count">2 links</span>
             <span class="subsection-arrow">↗</span>
@@ -961,8 +982,8 @@
             <span class="subsection-title">Notebook LM Resources</span>
             <span class="subsection-arrow">↗</span>
           </a>
-          <div class="subsection-item cat-thermo is-key has-popup" data-title="Optional Book Problems &amp; Key">
-            <span class="subsection-num num-key-thermo">HW</span>
+          <div class="subsection-item cat-thermo has-popup" data-title="Optional Book Problems &amp; Key">
+            <span class="subsection-num num-thermo">HW</span>
             <span class="subsection-title">Optional Book Problems &amp; Key</span>
             <span class="subsection-count">2 links</span>
             <span class="subsection-arrow">↗</span>
@@ -1069,8 +1090,8 @@
               <a href="https://drive.google.com/file/d/1YIT5RLocYjvP4WvVb86zU5LylUro2wlD/view?usp=classroom_web&authuser=0">Ch 15 &amp; 16 LessSup Q 25.webm</a>
             </div>
           </div>
-          <div class="subsection-item cat-acids is-key has-popup" data-title="Optional Unit HW Bookwork &amp; Key">
-            <span class="subsection-num num-key-acids">HW</span>
+          <div class="subsection-item cat-acids has-popup" data-title="Optional Unit HW Bookwork &amp; Key">
+            <span class="subsection-num num-acids">HW</span>
             <span class="subsection-title">Optional Unit HW Bookwork &amp; Key</span>
             <span class="subsection-count">3 links</span>
             <span class="subsection-arrow">↗</span>
@@ -1133,16 +1154,26 @@
               <a href="https://docs.google.com/document/d/1n-bzgMSLTmOh6UBx11Zkc1tVofiwItXimqIyTq_R2hk/edit?usp=classroom_web&authuser=0">Rubric</a>
             </div>
           </div>
-          <a href="https://drive.google.com/file/d/1IaulAjVAx9J7R-7GFXp36pGPwbd86hFF/view?usp=classroom_web&authuser=0" target="_blank" class="subsection-item cat-entropy">
+          <div class="subsection-item cat-entropy has-popup" data-title="Past Free Response Questions">
             <span class="subsection-num num-entropy">FRQ</span>
             <span class="subsection-title">Past Free Response Questions</span>
+            <span class="subsection-count">incl. answers</span>
             <span class="subsection-arrow">↗</span>
-          </a>
-          <a href="https://drive.google.com/file/d/12t-5_wEhXAm9V8dkThnjawD2XqFJPQ4a/view?usp=classroom_web&authuser=0" target="_blank" class="subsection-item cat-entropy is-key">
-            <span class="subsection-num num-key-entropy">Key</span>
-            <span class="subsection-title">Solutions for Book Problems</span>
+            <div class="popup-data">
+              <a href="https://drive.google.com/file/d/1IaulAjVAx9J7R-7GFXp36pGPwbd86hFF/view?usp=classroom_web&authuser=0">Past Free Response Questions</a>
+              <p class="popup-note">The answer key is in the document.</p>
+            </div>
+          </div>
+          <div class="subsection-item cat-entropy has-popup" data-title="Book Problems &amp; Solutions">
+            <span class="subsection-num num-entropy">HW</span>
+            <span class="subsection-title">Book Problems &amp; Solutions</span>
+            <span class="subsection-count">key only</span>
             <span class="subsection-arrow">↗</span>
-          </a>
+            <div class="popup-data">
+              <a href="https://drive.google.com/file/d/12t-5_wEhXAm9V8dkThnjawD2XqFJPQ4a/view?usp=classroom_web&authuser=0">Solutions for Book Problems</a>
+              <p class="popup-note">In my 2026 GC I could not find the original book problems, so there is only the answer key.</p>
+            </div>
+          </div>
           <a href="https://drive.google.com/file/d/1cNfnLPV7LyFbTMAvtpgiQUZNpyz7qj34/view" target="_blank" class="subsection-item cat-entropy is-key">
             <span class="subsection-num num-key-entropy">Key</span>
             <span class="subsection-title">Ch 18 Answer Key</span>
@@ -1186,14 +1217,21 @@
         e.preventDefault();
         modalTitle.textContent = item.dataset.title || 'Resources';
         modalBody.innerHTML = '';
-        item.querySelectorAll('.popup-data a').forEach(a => {
-          const link = document.createElement('a');
-          link.href = a.getAttribute('href');
-          link.target = '_blank';
-          link.rel = 'noopener';
-          link.className = 'modal-link';
-          link.innerHTML = '<span>' + a.textContent + '</span><span class="ml-arrow">↗</span>';
-          modalBody.appendChild(link);
+        item.querySelectorAll('.popup-data > *').forEach(node => {
+          if (node.tagName === 'A') {
+            const link = document.createElement('a');
+            link.href = node.getAttribute('href');
+            link.target = '_blank';
+            link.rel = 'noopener';
+            link.className = 'modal-link';
+            link.innerHTML = '<span>' + node.textContent + '</span><span class="ml-arrow">↗</span>';
+            modalBody.appendChild(link);
+          } else if (node.classList.contains('popup-note')) {
+            const note = document.createElement('p');
+            note.className = 'modal-note';
+            note.textContent = node.textContent;
+            modalBody.appendChild(note);
+          }
         });
         modal.classList.add('open');
       });
